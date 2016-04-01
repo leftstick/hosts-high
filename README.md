@@ -5,7 +5,7 @@ hosts
 
 This is a tiny tool for quick managing hosts file
 
-![](./docs/imgs/preview.png)
+![](./docs/img/preview.png)
 
 ## Known Issue ##
 
