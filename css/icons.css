@@ -58,3 +58,14 @@
     opacity: 1;
     transition: all 1.5s ease;
 }
+
+a.disabled{
+    pointer-events: none;
+}
+
+.ag-cell-edit-input{
+    height: 27px !important;
+    line-height: 27px !important;
+    font-size: 14px !important;
+    padding-bottom: 8px !important;
+}
