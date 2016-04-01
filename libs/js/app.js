@@ -12,6 +12,7 @@ var HostsService = require('./service/HostsService');
 var addHosts = require('./ui/addHosts');
 var addFilter = require('./ui/AddFilter');
 var copyCell = require('./ui/CopyCell');
+var editAlias = require('./ui/EditAlias');
 var operation = require('./ui/Operation');
 
 document.body.style.display = 'block';
@@ -79,3 +80,4 @@ HostsService
 addFilter(gridOptions);
 addHosts(rowData, refreshData);
 copyCell(gridOptions);
+editAlias(gridOptions);
