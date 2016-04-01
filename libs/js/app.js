@@ -29,7 +29,8 @@ var cellRenderer = function(params) {
     button.querySelector('#removeBtn').addEventListener('click', function(e) {
         hostile.remove(params.data.ip, params.data.domain, function(err) {
             if (err) {
-                return alert('failed deleting ' + params.data.ip);
+                return alert('failed deleting ' + params.data.ip +
+                    '\n\n Please Make sure you have permission to modify /etc/hosts file');
             }
             rowData = rowData.filter(d => d.ip !== params.data.ip);
             localStorage.removeItem('hosts_alias_' + params.data.ip);
@@ -147,7 +148,8 @@ addHostBtn.addEventListener('click', function() {
     };
     hostile.set(d.ip, d.domain, function(err) {
         if (err) {
-            return alert('failed adding ' + d.ip);
+            return alert('failed adding ' + d.ip +
+                '\n\n Please Make sure you have permission to modify /etc/hosts file');
         }
         if (d.alias) {
             localStorage.setItem('hosts_alias_' + d.ip, d.alias);
