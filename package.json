@@ -1,0 +1,25 @@
+{
+  "name": "hosts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "watch": "webpack -w",
+    "build": "webpack",
+    "package": "npm run build; rm -rf dist; electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --ignore='(css|dist|fonts|libs|hosts.icns|webpack.config.js)|node_modules/'"
+  },
+  "author": "Howard.Zuo",
+  "license": "MIT",
+  "devDependencies": {
+    "electron-packager": "^6.0.0",
+    "electron-prebuilt": "^0.37.3",
+    "webpack": "^1.12.14"
+  },
+  "dependencies": {
+    "ag-grid": "^4.0.5",
+    "hostile": "^1.0.2",
+    "jquery": "^2.2.2",
+    "materialize-css": "^0.97.5"
+  }
+}
