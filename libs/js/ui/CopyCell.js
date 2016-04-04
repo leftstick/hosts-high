@@ -1,9 +1,9 @@
 'use strict';
 
-var copyCell = function(opts) {
+var copyCell = function(api) {
     var toast = document.querySelector('#toast span');
 
-    opts.api.addEventListener('cellDoubleClicked', function(e) {
+    api.addEventListener('cellDoubleClicked', function(e) {
         if (e.colDef.field === 'alias') {
             return;
         }

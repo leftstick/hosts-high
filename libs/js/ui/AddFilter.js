@@ -1,8 +1,8 @@
 'use strict';
 
-var addFilter = function(opts) {
+var addFilter = function(app) {
     document.querySelector('#filter').addEventListener('input', function(e) {
-        opts.api.setQuickFilter(e.target.value);
+        api.setQuickFilter(e.target.value);
     }, false);
 };
 

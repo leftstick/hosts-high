@@ -2,8 +2,8 @@
 
 var ALIAS_PREFIX = 'hosts_alias_';
 
-var editAlias = function(opts) {
-    opts.api.addEventListener('cellValueChanged', function(e) {
+var editAlias = function(api) {
+    api.addEventListener('cellValueChanged', function(e) {
         if (e.colDef.field !== 'alias') {
             return;
         }

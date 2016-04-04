@@ -2,7 +2,7 @@
 
 var HostsService = require('../service/HostsService');
 
-var operation = function(rowData, refreshData) {
+var operation = function(refreshData) {
 
     return function(params) {
         var button = document.createElement('span');
@@ -12,9 +12,7 @@ var operation = function(rowData, refreshData) {
         button.querySelector('#removeBtn').addEventListener('click', function(e) {
             HostsService
                 .remove(params.data)
-                .then(host => {
-                    refreshData(rowData.filter(d => d.ip !== host.ip));
-                })
+                .then(refreshData)
                 .catch(alert);
         });
 

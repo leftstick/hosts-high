@@ -22,7 +22,7 @@ var toggleClass = function(node, bool) {
     }
 };
 
-var addHosts = function(rowData, refreshData) {
+var addHosts = function(refreshData) {
 
     aliasInput.addEventListener('input', function(e) {
         toggleClass(e.target, /^\w{0,10}$/.test(e.target.value));
@@ -46,7 +46,7 @@ var addHosts = function(rowData, refreshData) {
         HostsService
             .add(d)
             .then(host => {
-                refreshData([host].concat(rowData));
+                refreshData();
                 aliasInput.value = '';
                 ipInput.value = '';
                 domainInput.value = '';
