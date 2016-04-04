@@ -11,7 +11,7 @@ var addFilter = require('./ui/AddFilter');
 var copyCell = require('./ui/CopyCell');
 var editAlias = require('./ui/EditAlias');
 
-var hostsTable = require('./ui/hostsTable');
+var hostsTable = require('./ui/HostsTable');
 
 document.body.style.display = 'block';
 
