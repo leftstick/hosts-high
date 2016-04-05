@@ -12,7 +12,7 @@ This is a tiny tool for quick managing hosts file
 
 ### permission ###
 
-You have to `chown`/`chmod` `/etc/hosts` first, otherwise, It's not possible to modify `/etc/hosts`.
+You have to give write permission to `/etc/hosts` first, otherwise, It's not possible to modify `/etc/hosts`.
 
 >I know this is really bad, if you have better way to ask for permission every time when user launch the app, feel free give me a PR
 
