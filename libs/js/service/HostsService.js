@@ -20,7 +20,7 @@ var HostsService = {
                         domain: domain
                     };
                 });
-                resolve(rowData);
+                resolve(rowData.reverse());
             });
         });
     },
