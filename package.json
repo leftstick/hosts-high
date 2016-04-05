@@ -8,7 +8,7 @@
     "watch": "webpack -w",
     "build": "webpack",
     "postinstall": "npm run build",
-    "package": "npm run build; rm -rf dist; electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --ignore='(css|dist|fonts|libs|hosts.icns|webpack.config.js)|node_modules/'"
+    "package": "npm run build; rm -rf dist; electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --ignore='(css|dist|fonts|src|hosts.icns|webpack.config.js)|node_modules/'"
   },
   "author": "Howard.Zuo",
   "license": "MIT",
