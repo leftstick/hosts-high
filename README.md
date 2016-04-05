@@ -16,6 +16,21 @@ You have to give write permission to `/etc/hosts` first, otherwise, It's not pos
 
 >I know this is really bad, if you have better way to ask for permission every time when user launch the app, feel free give me a PR
 
+## How To Contribute ##
+
+>clone repo first
+
+```bash
+npm install
+npm run watch //continuously watch the code change, and output new bundle
+```
+
+Start a new terminal session:
+
+```bash
+npm start //launch Hosts GUI
+```
+
 
 ## LICENSE ##
 
