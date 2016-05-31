@@ -14,17 +14,16 @@
   "license": "MIT",
   "devDependencies": {
     "css-loader": "^0.23.1",
-    "electron-packager": "^6.0.0",
-    "electron-prebuilt": "^0.37.4",
+    "electron-packager": "^7.0.2",
+    "electron-prebuilt": "^1.2.0",
     "file-loader": "^0.8.5",
-    "materialize-css": "^0.97.6",
     "style-loader": "^0.13.1",
-    "webpack": "^1.12.14"
+    "webpack": "^1.13.1"
   },
   "dependencies": {
     "ag-grid": "^4.0.5",
     "hostile": "^1.0.2",
-    "jquery": "^2.2.2",
-    "materialize-css": "^0.97.5"
+    "jquery": "^2.2.3",
+    "materialize-css": "^0.97.6"
   }
 }
