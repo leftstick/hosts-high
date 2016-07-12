@@ -1,6 +1,6 @@
 {
   "name": "hosts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -14,16 +14,16 @@
   "license": "MIT",
   "devDependencies": {
     "css-loader": "^0.23.1",
-    "electron-packager": "^7.0.2",
-    "electron-prebuilt": "^1.2.0",
-    "file-loader": "^0.8.5",
+    "electron-packager": "^7.3.0",
+    "electron-prebuilt": "^1.2.6",
+    "file-loader": "^0.9.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "ag-grid": "^4.0.5",
+    "ag-grid": "^5.0.1",
     "hostile": "^1.0.2",
-    "jquery": "^2.2.3",
+    "jquery": "^3.1.0",
     "materialize-css": "^0.97.6"
   }
 }
