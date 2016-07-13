@@ -30,18 +30,32 @@ var HostsService = {
     },
 
     add: function(host) {
-        return new Promise(function(resolve, reject) {
-            hostile.set(host.ip, host.domain, function(err) {
-                if (err) {
-                    return reject('failed adding ' + host.ip +
-                        '\n\n Please Make sure you have permission to modify ' + os.HOSTS + ' file');
+        var _this = this;
+
+        return this
+            .get()
+            .then(function(data) {
+                var filtered = data.filter(function(item) {
+                    return !item.disabled && item.domain === host.domain;
+                });
+                if (filtered.length > 0) {
+                    return _this.toggleDisable(filtered[0]);
                 }
-                if (host.alias) {
-                    localStorage.setItem(ALIAS_PREFIX + host.ip, host.alias);
-                }
-                resolve(host);
+            })
+            .then(function() {
+                return new Promise(function(resolve, reject) {
+                    hostile.set(host.ip, host.domain, function(err) {
+                        if (err) {
+                            return reject('failed adding ' + host.ip +
+                                '\n\n Please Make sure you have permission to modify ' + os.HOSTS + ' file');
+                        }
+                        if (host.alias) {
+                            localStorage.setItem(ALIAS_PREFIX + host.ip, host.alias);
+                        }
+                        resolve(host);
+                    });
+                });
             });
-        });
     },
 
     remove: function(host) {
