@@ -1,20 +1,16 @@
 hosts
 ====================
 
-![](https://img.shields.io/badge/hosts-1.0.0-blue.svg)
+![](https://img.shields.io/badge/hosts-1.1.0-blue.svg)
 ![][david-url]
 
 This is a tiny tool for quick managing hosts file
 
 ![](./docs/img/preview.png)
 
-## Known Issue ##
+## Permission ##
 
-### permission ###
-
-You have to give write permission to `/etc/hosts` first, otherwise, It's not possible to modify `/etc/hosts`.
-
->I know this is really bad, if you have better way to ask for permission every time when user launch the app, feel free give me a PR
+Since modifying hosts file require root privileges, you may need to approve it once authentication dialog displayed.
 
 ## How To Contribute ##
 
@@ -22,14 +18,10 @@ You have to give write permission to `/etc/hosts` first, otherwise, It's not pos
 
 ```bash
 npm install
-npm run watch //continuously watch the code change, and output new bundle
+npm start
 ```
 
-Start a new terminal session:
-
-```bash
-npm start //launch Hosts GUI
-```
+>once code changed, you may need `ctrl/cmd + shift + r` to reload it.
 
 
 ## LICENSE ##
