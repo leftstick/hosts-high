@@ -38,7 +38,7 @@ var createTable = function() {
         {
             headerName: 'IP Address',
             field: 'ip',
-            width: 120,
+            width: 100,
             cellStyle: cellStyle
         },
         {
@@ -49,7 +49,7 @@ var createTable = function() {
         {
             headerName: 'Operation',
             field: 'oper',
-            width: 50,
+            width: 70,
             cellRenderer: operation(refreshData),
             cellStyle: {
                 'text-align': 'center'

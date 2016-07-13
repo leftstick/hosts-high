@@ -53,6 +53,8 @@ var HostsService = {
         });
     },
 
+    disable: function() {},
+
     addPermission: function() {
         localStorage.setItem(ALIAS_PREFIX + 'permission', 'true');
     },

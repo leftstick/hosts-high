@@ -4,7 +4,7 @@ var copyCell = function(api) {
     var toast = document.querySelector('#toast span');
 
     api.addEventListener('cellDoubleClicked', function(e) {
-        if (e.colDef.field === 'alias') {
+        if (e.colDef.field === 'alias' || e.colDef.field === 'oper') {
             return;
         }
         toast.innerText = 'Copied: ' + e.value;

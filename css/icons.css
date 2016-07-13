@@ -69,3 +69,16 @@ a.disabled{
     font-size: 14px !important;
     padding-bottom: 8px !important;
 }
+
+#statusBtn{
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    border-radius: 50%;
+    border: none;
+    background-color: #b4b7b8;
+}
+
+#statusBtn.enabled{
+    background-color: #75e255;
+}

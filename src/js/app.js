@@ -19,7 +19,6 @@ createTable();
 permission
     .hasPermission()
     .then(function() {}, function(err) {
-        console.log(err);
         return permission.prompt();
     })
     .then(function() {
