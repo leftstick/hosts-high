@@ -5,7 +5,10 @@
   "main": "main.js",
   "scripts": {
     "start": "concurrently \"electron .\" \"webpack -w\"",
-    "package": "webpack; rm -rf dist; electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --ignore='(css|dist|fonts|src|hosts.icns|webpack.config.js)|node_modules/'"
+    "packageDarwin": "electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --ignore='(css|dist|fonts|src|hosts.icns|hosts.ico|webpack.config.js)|node_modules/'",
+    "packageWin": "electron-packager . 'Hosts' --platform=win32 --arch=x64 --icon=hosts.ico --out=./dist --asar --ignore='(css|dist|fonts|src|hosts.icns|hosts.ico|webpack.config.js)|node_modules/'",
+    "prepackage": "rm -rf build && webpack && rm -rf dist",
+    "package": "npm run packageDarwin && npm run packageWin"
   },
   "author": "Howard.Zuo",
   "license": "MIT",

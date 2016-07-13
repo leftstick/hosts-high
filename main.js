@@ -18,7 +18,7 @@ var startupOpts = {
     resizable: false,
     alwaysOnTop: false,
     fullscreen: false,
-    skipTaskbar: true,
+    skipTaskbar: false,
     kiosk: false,
     title: '',
     icon: null,
