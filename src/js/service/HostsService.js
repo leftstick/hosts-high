@@ -45,6 +45,16 @@ var HostsService = {
     },
 
     remove: function(host) {
+        if (host.disabled) {
+            return new Promise(function(resolve) {
+                var list = JSON.parse(localStorage.getItem(ALIAS_PREFIX + 'disabledList'));
+                var filteredList = list.filter(function(item) {
+                    return item.ip !== host.ip || item.domain !== host.domain;
+                });
+                localStorage.setItem(ALIAS_PREFIX + 'disabledList', JSON.stringify(filteredList));
+                resolve(host);
+            });
+        }
         return new Promise(function(resolve, reject) {
             hostile.remove(host.ip, host.domain, function(err) {
                 if (err) {
