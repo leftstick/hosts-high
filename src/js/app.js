@@ -6,19 +6,26 @@ require('materialize-css/js/forms');
 require('materialize-css/dist/css/materialize.css');
 require('../../css/icons.css');
 
-var addHosts = require('./ui/addHosts');
-var addFilter = require('./ui/AddFilter');
-var copyCell = require('./ui/CopyCell');
-var editAlias = require('./ui/EditAlias');
+var permission = require('./secure/Permission');
 
-var hostsTable = require('./ui/HostsTable');
+var createTable = require('./ui/HostsTable');
+
+var service = require('./service/HostsService');
 
 document.body.style.display = 'block';
 
+createTable();
 
-var app = hostsTable();
-
-addFilter(app.api);
-addHosts(app.refreshData);
-copyCell(app.api);
-editAlias(app.api);
+permission
+    .hasPermission()
+    .then(function() {}, function(err) {
+        console.log(err);
+        return permission.prompt();
+    })
+    .then(function() {
+        if (!service.isPermissionSet()) {
+            service.addPermission();
+            require('electron').remote.getCurrentWindow().reload();
+        }
+    })
+    .catch(alert);

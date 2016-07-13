@@ -4,15 +4,13 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "watch": "webpack -w",
-    "build": "webpack",
-    "postinstall": "npm run build",
-    "package": "npm run build; rm -rf dist; electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --ignore='(css|dist|fonts|src|hosts.icns|webpack.config.js)|node_modules/'"
+    "start": "concurrently \"electron .\" \"webpack -w\"",
+    "package": "webpack; rm -rf dist; electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --ignore='(css|dist|fonts|src|hosts.icns|webpack.config.js)|node_modules/'"
   },
   "author": "Howard.Zuo",
   "license": "MIT",
   "devDependencies": {
+    "concurrently": "^2.2.0",
     "css-loader": "^0.23.1",
     "electron-packager": "^7.3.0",
     "electron-prebuilt": "^1.2.6",
@@ -22,6 +20,7 @@
   },
   "dependencies": {
     "ag-grid": "^5.0.1",
+    "electron-sudo": "git+https://github.com/leftstick/electron-sudo.git",
     "hostile": "^1.0.2",
     "jquery": "^3.1.0",
     "materialize-css": "^0.97.6"

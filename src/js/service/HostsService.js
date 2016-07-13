@@ -51,6 +51,14 @@ var HostsService = {
                 resolve(host);
             });
         });
+    },
+
+    addPermission: function() {
+        localStorage.setItem(ALIAS_PREFIX + 'permission', 'true');
+    },
+
+    isPermissionSet: function() {
+        return !!localStorage.getItem(ALIAS_PREFIX + 'permission');
     }
 };
 

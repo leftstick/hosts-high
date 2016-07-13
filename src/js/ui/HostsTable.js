@@ -4,7 +4,12 @@ var HostsService = require('../service/HostsService');
 var AgGrid = require('ag-grid/dist/ag-grid');
 var operation = require('./Operation');
 
-var hostsTable = function() {
+var addHosts = require('./addHosts');
+var addFilter = require('./AddFilter');
+var copyCell = require('./CopyCell');
+var editAlias = require('./EditAlias');
+
+var createTable = function() {
     var gridOptions;
 
     var refreshData = function() {
@@ -65,7 +70,10 @@ var hostsTable = function() {
 
     refreshData();
 
-    return {api: gridOptions.api, refreshData};
+    addFilter(gridOptions.api);
+    addHosts(refreshData);
+    copyCell(gridOptions.api);
+    editAlias(gridOptions.api);
 };
 
-module.exports = hostsTable;
+module.exports = createTable;

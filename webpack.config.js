@@ -25,6 +25,9 @@ module.exports = {
         ]
     },
     target: 'electron',
+    node: {
+        __filename: true
+    },
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
