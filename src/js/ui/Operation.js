@@ -21,7 +21,6 @@ var operation = function(refreshData) {
                 .then(function() {
                     if (!HostsService.isPermissionSet()) {
                         HostsService.addPermission();
-                        require('electron').remote.getCurrentWindow().reload();
                     }
                 })
                 .catch(alert);;
