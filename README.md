@@ -6,11 +6,18 @@ hosts
 
 This is a tiny tool for quick managing hosts file
 
+
 ![](./docs/img/preview.png)
 
 ## Permission ##
 
 Since modifying hosts file require root privileges, you may need to approve it once authentication dialog displayed.
+
+# Download ##
+
+* Windows: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.1.0/hosthigh-1.1.0-win64.zip)
+* Mac 10.11+: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.1.0/hosthigh-1.1.0-darwin.zip)
+
 
 ## How To Contribute ##
 
