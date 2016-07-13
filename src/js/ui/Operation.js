@@ -8,7 +8,9 @@ var operation = function(refreshData) {
     return function(params) {
         var opers = document.createElement('div');
 
-        opers.innerHTML = '<button id="removeBtn">-</button>&nbsp;&nbsp;<button id="statusBtn"></button>';
+        opers.innerHTML = '<button id="removeBtn">-</button>&nbsp;&nbsp;<button id="statusBtn" class="'
+            + (params.data.disabled ? 'disabled' : '') +
+            '"></button>';
 
         opers.querySelector('#removeBtn').addEventListener('click', function(e) {
             e.stopPropagation();
@@ -23,17 +25,31 @@ var operation = function(refreshData) {
                         HostsService.addPermission();
                     }
                 })
-                .catch(alert);;
+                .catch(alert);
         });
 
         opers.querySelector('#statusBtn').addEventListener('click', function(e) {
             e.stopPropagation();
             e.preventDefault();
-            if (this.classList.contains('enabled')) {
-                this.classList.remove('enabled');
-            } else {
-                this.classList.add('enabled');
-            }
+            var _this = this;
+            HostsService
+                .toggleDisable(params.data)
+                .then(function(host) {
+                    if (host.disabled) {
+                        _this.classList.add('disabled');
+                    } else {
+                        _this.classList.remove('disabled');
+                    }
+                    refreshData();
+                }, function() {
+                    return permission.prompt();
+                })
+                .then(function() {
+                    if (!HostsService.isPermissionSet()) {
+                        HostsService.addPermission();
+                    }
+                })
+                .catch(alert);
         });
 
         return opers;

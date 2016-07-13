@@ -76,9 +76,9 @@ a.disabled{
     vertical-align: middle;
     border-radius: 50%;
     border: none;
-    background-color: #b4b7b8;
+    background-color: #75e255;
 }
 
-#statusBtn.enabled{
-    background-color: #75e255;
+#statusBtn.disabled{
+    background-color: #b4b7b8;
 }
