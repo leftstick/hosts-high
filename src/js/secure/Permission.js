@@ -1,9 +1,10 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 var os = require('./OS');
 
-var sudo = require('electron-sudo');
+var sudo = require('sudo-prompt');
 
 module.exports.hasPermission = function() {
 
@@ -21,7 +22,6 @@ module.exports.hasPermission = function() {
 module.exports.prompt = function() {
     var options = {name: 'Hosts High'};
     return new Promise(function(resolve, reject) {
-        console.log(os.PERMISSION_CMD);
         sudo.exec(os.PERMISSION_CMD, options, function(err) {
             if (err) {
                 return reject(err);

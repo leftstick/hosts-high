@@ -1,12 +1,12 @@
 {
   "name": "hosts",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "",
   "main": "main.js",
   "scripts": {
     "start": "concurrently \"electron .\" \"webpack -w\"",
-    "packageDarwin": "electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --ignore='(css|dist|fonts|src|hosts.icns|hosts.ico|webpack.config.js)|node_modules/'",
-    "packageWin": "electron-packager . 'Hosts' --platform=win32 --arch=x64 --icon=hosts.ico --out=./dist --asar --ignore='(css|dist|fonts|src|hosts.icns|hosts.ico|webpack.config.js)|node_modules/'",
+    "packageDarwin": "electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --ignore='(css|dist|fonts|src|docs|.gitignore|LICENSE|README.md|hosts.icns|hosts.ico|webpack.config.js|node_modules/(?!sudo-prompt))'",
+    "packageWin": "electron-packager . 'Hosts' --platform=win32 --arch=x64 --icon=hosts.ico --out=./dist --asar --ignore='(css|dist|fonts|src|docs|.gitignore|LICENSE|README.md|hosts.icns|hosts.ico|webpack.config.js|node_modules/(?!sudo-prompt))'",
     "prepackage": "rm -rf build && webpack && rm -rf dist",
     "package": "npm run packageDarwin && npm run packageWin"
   },
@@ -23,9 +23,9 @@
   },
   "dependencies": {
     "ag-grid": "^5.0.1",
-    "electron-sudo": "git+https://github.com/leftstick/electron-sudo.git",
     "hostile": "^1.0.2",
     "jquery": "^3.1.0",
-    "materialize-css": "^0.97.6"
+    "materialize-css": "^0.97.6",
+    "sudo-prompt": "^5.1.0"
   }
 }

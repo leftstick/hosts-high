@@ -8,6 +8,6 @@ var user = process.env.USER || process.env.USERPROFILE.split(require('path').sep
 
 module.exports.HOSTS = hosts;
 
-module.exports.PERMISSION_CMD = isWindows ? 'icacls ' + hosts + ' /grant "Users":F' : 'chmod u+rw ' + hosts;
+module.exports.PERMISSION_CMD = isWindows ? 'icacls ' + hosts + ' /grant "Users":F' : 'chmod ugo+rw ' + hosts;
 
 module.exports.USER = user;
