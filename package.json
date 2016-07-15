@@ -7,8 +7,9 @@
     "start": "concurrently \"electron .\" \"webpack -w\"",
     "packageDarwin": "electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --ignore='(css|dist|fonts|src|docs|.gitignore|LICENSE|README.md|hosts.icns|hosts.ico|webpack.config.js|node_modules/(?!sudo-prompt))'",
     "packageWin": "electron-packager . 'Hosts' --platform=win32 --arch=x64 --icon=hosts.ico --out=./dist --asar --ignore='(css|dist|fonts|src|docs|.gitignore|LICENSE|README.md|hosts.icns|hosts.ico|webpack.config.js|node_modules/(?!sudo-prompt))'",
+    "packageLinux": "electron-packager . 'Hosts' --platform=linux --arch=x64 --out=./dist --asar --ignore='(css|dist|fonts|src|docs|.gitignore|LICENSE|README.md|hosts.icns|hosts.ico|webpack.config.js|node_modules/(?!sudo-prompt))'",
     "prepackage": "rm -rf build && webpack && rm -rf dist",
-    "package": "npm run packageDarwin && npm run packageWin"
+    "package": "npm run packageDarwin && npm run packageWin && npm run packageLinux"
   },
   "author": "Howard.Zuo",
   "license": "MIT",
