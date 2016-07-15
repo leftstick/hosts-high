@@ -19,6 +19,7 @@ Since modifying hosts file require root privileges, you may need to approve it o
 
 * Windows: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.1.2/hosthigh-1.1.2-win64.zip)
 * Mac 11.11+: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.1.2/hosthigh-1.1.2-darwin.zip)
+* Linux: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.1.2/hosthigh-1.1.2-linux.zip)
 
 
 ## How To Contribute ##
