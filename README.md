@@ -1,7 +1,7 @@
 hosts
 ====================
 
-![](https://img.shields.io/badge/hosts-1.1.2-blue.svg)
+![](https://img.shields.io/badge/hosts-1.2.0-blue.svg)
 ![][david-url]
 
 This is a tiny tool for quick managing hosts file
@@ -17,9 +17,9 @@ Since modifying hosts file require root privileges, you may need to approve it o
 
 # Download ##
 
-* Windows: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.1.2/hosthigh-1.1.2-win64.zip)
-* Mac 11.11+: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.1.2/hosthigh-1.1.2-darwin.zip)
-* Linux: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.1.2/hosthigh-1.1.2-linux.zip)
+* Windows: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.2.0/hosthigh-1.2.0-win64.zip)
+* Mac 11.11+: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.2.0/hosthigh-1.2.0-darwin.zip)
+* Linux: [64bit](https://github.com/leftstick/hosts-high/releases/download/1.2.0/hosthigh-1.2.0-linux.zip)
 
 
 ## How To Contribute ##
