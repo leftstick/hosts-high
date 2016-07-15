@@ -3,7 +3,7 @@
 var HostsService = require('../service/HostsService');
 var permission = require('../secure/Permission');
 
-var operation = function(refreshData) {
+var CellRenderer = function(refreshData) {
 
     return function(params) {
         var opers = document.createElement('div');
@@ -56,4 +56,4 @@ var operation = function(refreshData) {
     };
 };
 
-module.exports = operation;
+module.exports = CellRenderer;

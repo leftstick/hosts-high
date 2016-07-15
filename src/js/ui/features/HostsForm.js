@@ -1,6 +1,6 @@
 'use strict';
 
-var HostsService = require('../service/HostsService');
+var HostsService = require('../../service/HostsService');
 
 var ipReg = /^([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$/;
 
@@ -22,6 +22,19 @@ var toggleClass = function(node, bool) {
     }
 };
 
+var adding = function(d, refreshData) {
+    HostsService
+        .add(d)
+        .then(host => {
+            refreshData();
+            aliasInput.value = '';
+            ipInput.value = '';
+            domainInput.value = '';
+            addHostBtn.classList.add('disabled');
+        })
+        .catch(alert);
+};
+
 var addHosts = function(refreshData) {
 
     aliasInput.addEventListener('input', function(e) {
@@ -38,20 +51,25 @@ var addHosts = function(refreshData) {
 
 
     addHostBtn.addEventListener('click', function() {
-        var d = {
+        adding({
             alias: aliasInput.value,
             ip: ipInput.value,
             domain: domainInput.value
-        };
-        HostsService
-            .add(d)
-            .then(host => {
-                refreshData();
-                aliasInput.value = '';
-                ipInput.value = '';
-                domainInput.value = '';
-            })
-            .catch(alert);
+        }, refreshData);
+    }, false);
+
+    domainInput.addEventListener('keyup', function(e) {
+        if (e.keyCode !== 13) {
+            return;
+        }
+        if (addHostBtn.classList.contains('disabled')) {
+            return;
+        }
+        adding({
+            alias: aliasInput.value,
+            ip: ipInput.value,
+            domain: domainInput.value
+        }, refreshData);
     }, false);
 };
 

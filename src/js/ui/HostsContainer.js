@@ -2,28 +2,36 @@
 
 var HostsService = require('../service/HostsService');
 var AgGrid = require('ag-grid/dist/ag-grid');
-var operation = require('./Operation');
+var cellRenderer = require('./CellRenderer');
 
-var addHosts = require('./addHosts');
-var addFilter = require('./AddFilter');
-var copyCell = require('./CopyCell');
-var editAlias = require('./EditAlias');
-
-var createTable = function() {
-    var gridOptions;
-
-    var refreshData = function() {
+var getRefresher = function(options) {
+    return function() {
         HostsService
             .get()
             .then(function(data) {
-                return gridOptions.api.setRowData(data);
+                return options.api.setRowData(data);
             })
             .then(function() {
                 setTimeout(function() {
-                    gridOptions.api.sizeColumnsToFit();
+                    options.api.sizeColumnsToFit();
                 });
             });
     };
+};
+
+var initOptions = function(options, columnDefs) {
+    options.enableColResize = true;
+    options.enableSorting = true;
+    options.columnDefs = columnDefs;
+    options.rowData = null;
+    options.rowHeight = 30;
+    options.enableRangeSelection = true;
+};
+
+var create = function() {
+    var gridOptions = {};
+
+    var refresher = getRefresher(gridOptions);
 
     var cellStyle = {'line-height': '27px'};
 
@@ -50,30 +58,19 @@ var createTable = function() {
             headerName: 'Operation',
             field: 'oper',
             width: 70,
-            cellRenderer: operation(refreshData),
+            cellRenderer: cellRenderer(refresher),
             cellStyle: {
                 'text-align': 'center'
             }
         }
     ];
 
-    gridOptions = {
-        enableColResize: true,
-        enableSorting: true,
-        columnDefs: columnDefs,
-        rowData: null,
-        rowHeight: 30,
-        enableRangeSelection: true
-    };
+    initOptions(gridOptions, columnDefs);
 
+    // eslint-disable-next-line
     new AgGrid.Grid(document.querySelector('#hosts'), gridOptions);
 
-    refreshData();
-
-    addFilter(gridOptions.api);
-    addHosts(refreshData);
-    copyCell(gridOptions.api);
-    editAlias(gridOptions.api);
+    return {gridApi: gridOptions.api, refresher: refresher};
 };
 
-module.exports = createTable;
+module.exports.create = create;

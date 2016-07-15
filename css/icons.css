@@ -70,6 +70,10 @@ a.disabled{
     padding-bottom: 8px !important;
 }
 
+#addHostBtn{
+    padding: 0 9px 0 13px;
+}
+
 #statusBtn{
     width: 20px;
     height: 20px;

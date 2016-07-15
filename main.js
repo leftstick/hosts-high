@@ -127,7 +127,7 @@ var menus = [
 
 app.on('ready', function() {
 
-    Menu.setApplicationMenu(Menu.buildFromTemplate(menus))
+    Menu.setApplicationMenu(Menu.buildFromTemplate(menus));
 
     mainWindow = new BrowserWindow(startupOpts);
     mainWindow.loadURL('file://' + __dirname + '/index.html');

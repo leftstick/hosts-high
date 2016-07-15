@@ -24,7 +24,16 @@ var HostsService = {
                         domain: domain
                     };
                 });
-                resolve(rowData.concat(list).reverse());
+                var hosts = rowData.concat(list);
+                hosts.sort(
+                    function(a, b) {
+                        var aa = a.ip.split('.');
+                        var bb = b.ip.split('.');
+                        return (aa[0] * 0x1000000 + aa[1] * 0x10000 + aa[2] * 0x100 + aa[3] * 1)
+                            - (bb[0] * 0x1000000 + bb[1] * 0x10000 + bb[2] * 0x100 + bb[3] * 1);
+                    }
+                );
+                resolve(hosts);
             });
         });
     },
