@@ -27,6 +27,6 @@
     "hostile": "^1.0.3",
     "jquery": "^3.1.0",
     "materialize-css": "^0.97.6",
-    "sudo-prompt": "^5.1.0"
+    "sudo-prompt": "^6.0.1"
   }
 }
