@@ -13,6 +13,8 @@ var CellRenderer = function(refreshData) {
             '"></button>';
 
         opers.querySelector('#removeBtn').addEventListener('click', function(e) {
+            if(!confirm("Are you sure to delete?"))
+                return;
             e.stopPropagation();
             e.preventDefault();
             HostsService
