@@ -1,12 +1,10 @@
-'use strict';
+import hostile from 'hostile';
 
-var hostile = require('hostile');
+import os from '../secure/OS';
 
-var os = require('../secure/OS');
+const ALIAS_PREFIX = 'hosts_alias_';
 
-var ALIAS_PREFIX = 'hosts_alias_';
-
-var HostsService = {
+const HostsService = {
     get: function() {
         var str = localStorage.getItem(ALIAS_PREFIX + 'disabledList');
         var list = str ? JSON.parse(str) : [];
@@ -117,15 +115,13 @@ var HostsService = {
                 });
         }
         return promise;
-    },
-
-    addPermission: function() {
-        localStorage.setItem(ALIAS_PREFIX + 'permission', 'true');
-    },
-
-    isPermissionSet: function() {
-        return !!localStorage.getItem(ALIAS_PREFIX + 'permission');
     }
 };
 
-module.exports = HostsService;
+export function addPermission() {
+    localStorage.setItem(ALIAS_PREFIX + 'permission', 'true');
+}
+
+export function isPermissionSet() {
+    return !!localStorage.getItem(ALIAS_PREFIX + 'permission');
+}

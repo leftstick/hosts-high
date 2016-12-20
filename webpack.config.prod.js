@@ -1,4 +1,3 @@
-'use strict';
 const {resolve} = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
@@ -12,8 +11,8 @@ module.exports = {
     },
     output: {
         path: resolve(__dirname, 'build'),
-        filename: '[name].bundle.js',
-        chunkFilename: '[id].bundle.js'
+        filename: '[name].prod.js',
+        chunkFilename: '[id].prod.js'
     },
     module: {
         loaders: [
@@ -71,7 +70,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            __DEV__: true
+            __DEV__: false
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.NoErrorsPlugin(),

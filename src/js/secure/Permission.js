@@ -1,33 +1,32 @@
-'use strict';
+import {access, R_OK, W_OK} from 'fs';
+import {HOSTS, PERMISSION_CMD} from './OS';
 
-var fs = require('fs');
-var path = require('path');
-var os = require('./OS');
+import sudo from 'sudo-prompt';
 
-var sudo = require('sudo-prompt');
-
-module.exports.hasPermission = function() {
+export function hasPermission() {
 
     return new Promise(function(resolve, reject) {
-        fs.access(os.HOSTS, fs.R_OK | fs.W_OK, function(err) {
+        access(HOSTS, R_OK | W_OK, function(err) {
             if (err) {
                 return reject(err);
             }
             return resolve();
         });
     });
-};
+}
 
 
-module.exports.prompt = function() {
-    var options = {name: 'Hosts High'};
+
+export function prompt() {
+    const options = {
+        name: 'Hosts High'
+    };
     return new Promise(function(resolve, reject) {
-        sudo.exec(os.PERMISSION_CMD, options, function(err) {
+        sudo.exec(PERMISSION_CMD, options, function(err) {
             if (err) {
                 return reject(err);
             }
             return resolve();
         });
     });
-
-};
+}

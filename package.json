@@ -1,32 +1,47 @@
 {
   "name": "hosts",
-  "version": "1.4.1",
+  "version": "2.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "concurrently \"electron .\" \"webpack -w\"",
-    "packageDarwin": "electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --app-version=1.4.0 --ignore=\"(css|dist|fonts|src|docs|.gitignore|LICENSE|README.md|hosts.icns|hosts.ico|webpack.config.js|node_modules/(?!sudo-prompt))\"",
-    "packageWin": "electron-packager . 'Hosts' --platform=win32 --arch=x64 --icon=hosts.ico --out=./dist --asar --app-version=1.4.0 --ignore=\"(css|dist|fonts|src|docs|.gitignore|LICENSE|README.md|hosts.icns|hosts.ico|webpack.config.js|node_modules/(?!sudo-prompt))\"",
-    "packageLinux": "electron-packager . 'Hosts' --platform=linux --arch=x64 --out=./dist --asar --app-version=1.4.0 --ignore=\"(css|dist|fonts|src|docs|.gitignore|LICENSE|README.md|hosts.icns|hosts.ico|webpack.config.js|node_modules/(?!sudo-prompt))\"",
-    "prepackage": "rm -rf build && webpack && rm -rf dist",
+    "start": "concurrently \"electron .\" \"webpack-dev-server --inline --hot --port 8080\"",
+    "packageDarwin": "electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=hosts.icns --out=./dist --asar --app-version=2.0.0 --ignore=\"(dist|src|docs|.gitignore|LICENSE|README.md|webpack.config*|node_modules/(?!sudo-prompt))\"",
+    "packageWin": "electron-packager . 'Hosts' --platform=win32 --arch=x64 --icon=hosts.ico --out=./dist --asar --app-version=2.0.0 --ignore=\"(dist|src|docs|.gitignore|LICENSE|README.md|webpack.config.js|node_modules/(?!sudo-prompt))\"",
+    "packageLinux": "electron-packager . 'Hosts' --platform=linux --arch=x64 --out=./dist --asar --app-version=2.0.0 --ignore=\"(dist|src|docs|.gitignore|LICENSE|README.md|webpack.config.js|node_modules/(?!sudo-prompt))\"",
+    "prepackage": "rm -rf build && webpack --config webpack.config.prod.js && rm -rf dist",
     "package": "npm run packageDarwin && npm run packageWin && npm run packageLinux"
   },
   "author": "Howard.Zuo",
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^2.2.0",
-    "css-loader": "^0.23.1",
-    "electron-packager": "^7.5.1",
-    "electron-prebuilt": "^1.3.2",
+    "autoprefixer": "^6.5.4",
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.18.0",
+    "concurrently": "^3.1.0",
+    "css-loader": "^0.26.1",
+    "electron-packager": "^8.4.0",
+    "electron-prebuilt": "^1.4.12",
     "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.24.1",
+    "postcss-loader": "^1.2.1",
+    "postcss-nested": "^1.0.0",
+    "postcss-simple-vars": "^3.0.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.1"
+    "vue-hot-reload-api": "^2.0.6",
+    "vue-html-loader": "^1.2.3",
+    "vue-loader": "^10.0.2",
+    "vue-style-loader": "^1.0.0",
+    "vue-template-compiler": "^2.1.6",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "ag-grid": "^5.0.7",
-    "hostile": "^1.0.3",
-    "jquery": "^3.1.0",
-    "materialize-css": "^0.97.7",
-    "sudo-prompt": "^6.1.0"
+    "element-ui": "^1.0.7",
+    "hostile": "^1.1.1",
+    "sudo-prompt": "^6.2.1",
+    "vue": "^2.1.6"
   }
 }

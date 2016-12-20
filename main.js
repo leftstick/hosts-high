@@ -1,16 +1,16 @@
-'use strict';
 process.env.ELECTRON_HIDE_INTERNAL_MODULES = 'true';
 
-var electron = require('electron');
-var app = electron.app;
-var Menu = electron.Menu;
-var BrowserWindow = electron.BrowserWindow;
+const electron = require('electron');
+const fs = require('fs');
+const app = electron.app;
+const Menu = electron.Menu;
+const BrowserWindow = electron.BrowserWindow;
 
-var mainWindow = null;
+let mainWindow = null;
 
 app.on('window-all-closed', app.quit);
 
-var startupOpts = {
+const startupOpts = {
     useContentSize: true,
     width: 800,
     height: 680,
@@ -19,7 +19,7 @@ var startupOpts = {
     alwaysOnTop: false,
     fullscreen: false,
     skipTaskbar: false,
-    icon: 'hosts.png',
+    icon: __dirname + '/hosts.png',
     kiosk: false,
     title: '',
     show: false,
@@ -130,7 +130,15 @@ app.on('ready', function() {
     Menu.setApplicationMenu(Menu.buildFromTemplate(menus));
 
     mainWindow = new BrowserWindow(startupOpts);
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+    try {
+        if (fs.statSync(__dirname + '/build/index.prod.js').isFile()) {
+            mainWindow.loadURL('file://' + __dirname + '/build/index.html');
+        }
+    } catch (error) {
+        mainWindow.loadURL('http://localhost:8080/index.html');
+        BrowserWindow.addDevToolsExtension(__dirname + '/shells/chrome');
+    }
     mainWindow.on('closed', function() {
         mainWindow = null;
     });

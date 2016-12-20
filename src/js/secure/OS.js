@@ -1,13 +1,12 @@
-'use strict';
 
-var isWindows = process.platform === 'win32';
+const isWindows = process.platform === 'win32';
 
-var hosts = isWindows ? 'C:/Windows/System32/drivers/etc/hosts' : '/etc/hosts';
+const hosts = isWindows ? 'C:/Windows/System32/drivers/etc/hosts' : '/etc/hosts';
 
-var user = process.env.USER || process.env.USERPROFILE.split(require('path').sep)[2];
+const user = process.env.USER || process.env.USERPROFILE.split(require('path').sep)[2];
 
-module.exports.HOSTS = hosts;
+export const HOSTS = hosts;
 
-module.exports.PERMISSION_CMD = isWindows ? 'icacls ' + hosts + ' /grant "Users":F' : 'chmod ugo+rw ' + hosts;
+export const PERMISSION_CMD = isWindows ? 'icacls ' + hosts + ' /grant "Users":F' : 'chmod ugo+rw ' + hosts;
 
-module.exports.USER = user;
+export const USER = user;
