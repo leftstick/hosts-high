@@ -1,6 +1,6 @@
 <template>
     <div class="hosts-filter">
-        <el-input placeholder="Please anything as filter..." @change="change"></el-input>
+        <el-input placeholder="Type anything as filter..." @change="change"></el-input>
     </div>
 </template>
 
