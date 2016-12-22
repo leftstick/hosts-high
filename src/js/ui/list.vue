@@ -82,7 +82,10 @@ export default {
         copyText(cell) {
             const txt = cell.querySelector('.cell').innerHTML;
             require('electron').clipboard.writeText(txt);
-            this.$message(`[${txt}] copied`);
+            this.$message({
+                showClose: true,
+                message: `[${txt}] copied`
+            });
         },
         getList() {
             const list = eraseGetter(this.data);
