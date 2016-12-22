@@ -2,7 +2,7 @@
     <div class="quick-add">
         <el-form ref="quickAdd" :inline="true" :model="item" :rules="rule" @keyup.native.enter.stop.prevent="onSubmit" @submit.native.prevent>
             <el-form-item prop="alias">
-                <el-input v-model="item.alias" placeholder="Alias"></el-input>
+                <el-input ref="alias" v-model="item.alias" placeholder="Alias"></el-input>
             </el-form-item>
             <el-form-item prop="ip">
                 <el-input v-model="item.ip" placeholder="IP Address"></el-input>
@@ -63,6 +63,7 @@ export default {
                 if (!valid) {
                     return false;
                 }
+                this.$refs.alias.$el.querySelector('input').focus();
                 this.$emit('add', eraseGetter(this.item));
                 this.$refs.quickAdd.resetFields();
             });

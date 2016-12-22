@@ -2,7 +2,6 @@ import Vue from 'vue';
 import ElementUI from 'element-ui';
 import hosts from './hosts';
 
-import 'element-ui/lib/theme-default/index.css';
 import locale from 'element-ui/lib/locale/lang/en';
 
 class App {

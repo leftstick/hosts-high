@@ -9,6 +9,7 @@ module.exports = [
                 label: 'About Hosts High',
                 click: function() {
                     new BrowserWindow({
+                        parent: BrowserWindow.getFocusedWindow(),
                         width: 285,
                         height: 230,
                         center: true,

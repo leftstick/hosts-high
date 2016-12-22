@@ -26,7 +26,14 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                loader: 'babel?{"presets":["es2015"]}',
+                loader: 'babel',
+                query: {
+                    presets: ['es2015'],
+                    plugins: ['transform-object-rest-spread', ['component', [{
+                        libraryName: 'element-ui',
+                        styleLibraryName: 'theme-default'
+                    }]]]
+                },
                 exclude: /node_modules/
             },
             {
@@ -41,7 +48,7 @@ module.exports = {
     },
     vue: {
         loaders: {
-            js: 'babel?{"presets":["es2015"],"plugins": ["transform-object-rest-spread"]}',
+            js: 'babel?{"presets":["es2015"],"plugins": ["transform-object-rest-spread", ["component", [{"libraryName": "element-ui","styleLibraryName":"theme-default"}]]]}',
             css: 'vue-style!css!postcss'
         }
     },
@@ -82,8 +89,7 @@ module.exports = {
             inject: 'body',
             template: 'src/index.html',
             favicon: 'src/img/favicon.ico',
-            hash: false,
-            version: require('./package').version
+            hash: false
         })
     ]
 };
