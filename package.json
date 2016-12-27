@@ -14,7 +14,7 @@
   "author": "Howard.Zuo",
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "^6.5.4",
+    "autoprefixer": "^6.6.0",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-plugin-component": "^0.6.0",
@@ -35,14 +35,14 @@
     "vue-html-loader": "^1.2.3",
     "vue-loader": "^10.0.2",
     "vue-style-loader": "^1.0.0",
-    "vue-template-compiler": "^2.1.6",
+    "vue-template-compiler": "^2.1.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
     "element-ui": "^1.0.8",
-    "hostile": "https://github.com/leftstick/hostile.git",
+    "hostile": "^1.2.0",
     "sudo-prompt": "^6.2.1",
-    "vue": "^2.1.6"
+    "vue": "^2.1.7"
   }
 }
