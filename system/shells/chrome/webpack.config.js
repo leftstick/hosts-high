@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var alias = require('../alias')
 
 var bubleOptions = {
   target: process.env.NODE_ENV === 'production' ? null : { chrome: 52 },
@@ -21,9 +22,7 @@ module.exports = {
     filename: '[name].js',
   },
   resolve: {
-    alias: {
-      src: path.resolve(__dirname, '../../src')
-    }
+    alias
   },
   module: {
     rules: [
@@ -37,6 +36,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
+          preserveWhitespace: false,
           buble: bubleOptions
         }
       },
@@ -45,6 +45,9 @@ module.exports = {
         loader: 'url-loader?limit=0'
       }
     ]
+  },
+  performance: {
+    hints: false
   },
   devtool: process.env.NODE_ENV !== 'production'
     ? '#inline-source-map'

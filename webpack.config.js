@@ -1,9 +1,5 @@
-'use strict';
 const {resolve} = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const postcssNested = require('postcss-nested');
-const postcssVars = require('postcss-simple-vars');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -16,30 +12,44 @@ module.exports = {
         chunkFilename: '[id].bundle.js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.css$/,
-                loader: 'style!css'
+                use: ['style-loader', 'css-loader']
             },
             {
                 test: /\.vue$/,
-                loader: 'vue'
+                use: [{
+                    loader: 'vue-loader',
+                    options: {
+                        loaders: {
+                            js: 'babel-loader?{"presets":["es2015"],"plugins": ["transform-object-rest-spread", ["component", [{"libraryName": "element-ui","styleLibraryName":"theme-default"}]]]}',
+                            css: 'vue-style-loader!css-loader!postcss-loader'
+                        }
+                    }
+                }]
             },
             {
                 test: /\.js$/,
-                loader: 'babel',
-                query: {
-                    presets: ['es2015'],
-                    plugins: ['transform-object-rest-spread', ['component', [{
-                        libraryName: 'element-ui',
-                        styleLibraryName: 'theme-default'
-                    }]]]
-                },
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [['es2015', {
+                                modules: false
+                            }]],
+                            plugins: ['transform-object-rest-spread', ['component', [{
+                                libraryName: 'element-ui',
+                                styleLibraryName: 'theme-default'
+                            }]]]
+                        }
+                    }
+                ],
                 exclude: /node_modules/
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)\w*/,
-                loader: 'file'
+                use: ['file-loader']
             }
         ]
     },
@@ -47,28 +57,13 @@ module.exports = {
     node: {
         __filename: true
     },
-    vue: {
-        loaders: {
-            js: 'babel?{"presets":["es2015"],"plugins": ["transform-object-rest-spread", ["component", [{"libraryName": "element-ui","styleLibraryName":"theme-default"}]]]}',
-            css: 'vue-style!css!postcss'
-        }
-    },
-    postcss: function() {
-        return [
-            autoprefixer({
-                browsers: ['last 5 versions']
-            }),
-            postcssNested(),
-            postcssVars()
-        ];
-    },
     resolve: {
-        root: [
+        modules: [
+            resolve(__dirname, 'node_modules'),
             resolve(__dirname),
             resolve(__dirname, 'www')
         ],
         extensions: [
-            '',
             '.js',
             '.vue'
         ],
@@ -80,9 +75,6 @@ module.exports = {
         new webpack.DefinePlugin({
             __DEV__: true
         }),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.NoErrorsPlugin(),
-        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.AggressiveMergingPlugin(),
         new webpack.optimize.CommonsChunkPlugin('common.bundle.js'),
         new HtmlWebpackPlugin({
