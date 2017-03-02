@@ -2,6 +2,7 @@ process.env.ELECTRON_HIDE_INTERNAL_MODULES = 'true';
 
 const electron = require('electron');
 const fs = require('fs');
+const path = require('path');
 const app = electron.app;
 const Menu = electron.Menu;
 const BrowserWindow = electron.BrowserWindow;
@@ -37,13 +38,14 @@ app.on('ready', function() {
 
     mainWindow = new BrowserWindow(startupOpts);
 
-    fs.stat(__dirname + '/build/index.prod.js', function(e, stat) {
-        if (e || !stat.isFile()) {
+    if (process.env.NODE_ENV === 'dev') {
+        setTimeout(function() {
             mainWindow.loadURL('http://localhost:8080/index.html');
-            return BrowserWindow.addDevToolsExtension(__dirname + '/system/shells/chrome');
-        }
-        mainWindow.loadURL('file://' + __dirname + '/build/index.html');
-    });
+            BrowserWindow.addDevToolsExtension(__dirname + '/system/shells/chrome');
+        }, 5000);
+    } else {
+        mainWindow.loadURL('file://' + path.resolve(__dirname, 'build', 'index.html'));
+    }
 
     mainWindow.on('closed', function() {
         mainWindow = null;
