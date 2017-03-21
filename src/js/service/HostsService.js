@@ -108,7 +108,31 @@ export function toggleDisable(host) {
 export function setAlias(alias, row) {
     return new Promise(resolve => {
         if (alias) {
+            if (row.disabled) {
+                const list = getDisableList().map(item => {
+                    if (item.ip === row.ip && item.domain === item.domain) {
+                        return Object.assign({}, row, {
+                            alias
+                        });
+                    }
+                    return item;
+                });
+                localStorage.setItem(ALIAS_PREFIX + 'disabledList', JSON.stringify(list));
+                return resolve();
+            }
             localStorage.setItem(ALIAS_PREFIX + row.ip, alias);
+            return resolve();
+        }
+        if (row.disabled) {
+            const list = getDisableList().map(item => {
+                if (item.ip === row.ip && item.domain === item.domain) {
+                    return Object.assign({}, row, {
+                        alias: ''
+                    });
+                }
+                return item;
+            });
+            localStorage.setItem(ALIAS_PREFIX + 'disabledList', JSON.stringify(list));
             return resolve();
         }
         localStorage.removeItem(ALIAS_PREFIX + row.ip);

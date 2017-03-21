@@ -58,6 +58,12 @@ module.exports = {
             vue$: 'vue/dist/vue.js'
         }
     },
+    devServer: {
+        contentBase: resolve(__dirname, 'build'),
+        historyApiFallback: false,
+        port: 8080,
+        host: '0.0.0.0'
+    },
     plugins: [
         new webpack.DefinePlugin({
             __DEV__: true
