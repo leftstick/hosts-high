@@ -5,5 +5,5 @@
   "plugins": [
       "transform-object-rest-spread",
       ["component", [{ "libraryName": "element-ui", "styleLibraryName": "theme-default"}]]
-      ]
+  ]
 }
