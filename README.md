@@ -1,7 +1,7 @@
 hosts
 ====================
 
-![](https://img.shields.io/badge/hosts-2.0.1-blue.svg) 
+![](https://img.shields.io/badge/hosts-2.0.1-blue.svg)
 ![][david-url]
 
 This is a tiny tool for quick managing hosts file
@@ -35,5 +35,5 @@ npm start
 
 ## LICENSE ##
 
-[MIT License](https://raw.githubusercontent.com/leftstick/hosts-high/master/LICENSE)
+[MIT License]: (https://raw.githubusercontent.com/leftstick/hosts-high/master/LICENSE)
 [david-url]: https://david-dm.org/leftstick/hosts-high.png
