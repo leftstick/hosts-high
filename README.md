@@ -1,7 +1,7 @@
 hosts
 ====================
 
-![](https://img.shields.io/badge/hosts-2.0.1-blue.svg)
+![](https://img.shields.io/badge/hosts-2.0.1-blue.svg) 
 ![][david-url]
 
 This is a tiny tool for quick managing hosts file
