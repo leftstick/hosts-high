@@ -5,10 +5,10 @@
                 <el-input ref="alias" v-model="item.alias" placeholder="Alias"></el-input>
             </el-form-item>
             <el-form-item prop="ip">
-                <el-input v-model="item.ip" placeholder="IP Address"></el-input>
+                <el-input v-model="item.ip" placeholder="IP Address" size="30"></el-input>
             </el-form-item>
             <el-form-item class="domain" prop="domain">
-                <el-input v-model="item.domain" placeholder="Domain names"></el-input>
+                <el-input v-model="item.domain" placeholder="Domain names" size="50"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="default" icon="plus" @click="onSubmit"></el-button>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {eraseGetter} from '../util/object';
+import { eraseGetter } from '../util/object';
 
 export default {
     data() {
@@ -74,13 +74,10 @@ export default {
 </script>
 
 <style scoped>
-    .quick-add {
-        width: 100%;
-        display: flex;
-        justify-content: start;
-        flex-shrink: 0;
-    }
-    .domain {
-        width: 260px;
-    }
+.quick-add {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    flex-shrink: 0;
+}
 </style>

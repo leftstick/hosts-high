@@ -14,7 +14,7 @@ app.on('window-all-closed', app.quit);
 const startupOpts = {
     useContentSize: true,
     width: 1000,
-    minWidth: 750,
+    minWidth: 930,
     height: 700,
     minHeight: 600,
     center: true,
