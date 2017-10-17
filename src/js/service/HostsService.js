@@ -20,7 +20,7 @@ export function get() {
                 const ip = line[0];
                 const domain = line[1];
                 return {
-                    alias: localStorage.getItem(ALIAS_PREFIX + ip),
+                    alias: localStorage.getItem(ALIAS_PREFIX + ip + domain),
                     ip: ip,
                     domain: domain,
                     disabled: false
@@ -54,7 +54,7 @@ export function add(host) {
                             '\n\n Please Make sure you have permission to modify ' + HOSTS + ' file');
                     }
                     if (host.alias) {
-                        localStorage.setItem(ALIAS_PREFIX + host.ip, host.alias);
+                        localStorage.setItem(ALIAS_PREFIX + host.ip + host.domain, host.alias);
                     }
                     host.disabled = false;
                     resolve(host);
@@ -78,7 +78,7 @@ export function remove(host) {
                 return reject('failed deleting ' + host.ip +
                     '\n\n Please Make sure you have permission to modify ' + HOSTS + ' file');
             }
-            localStorage.removeItem(ALIAS_PREFIX + host.ip);
+            localStorage.removeItem(ALIAS_PREFIX + host.ip + host.domain);
             resolve(host);
         });
     });
@@ -110,7 +110,7 @@ export function setAlias(alias, row) {
         if (alias) {
             if (row.disabled) {
                 const list = getDisableList().map(item => {
-                    if (item.ip === row.ip && item.domain === item.domain) {
+                    if (item.ip === row.ip && item.domain === row.domain) {
                         return Object.assign({}, row, {
                             alias
                         });
@@ -120,12 +120,12 @@ export function setAlias(alias, row) {
                 localStorage.setItem(ALIAS_PREFIX + 'disabledList', JSON.stringify(list));
                 return resolve();
             }
-            localStorage.setItem(ALIAS_PREFIX + row.ip, alias);
+            localStorage.setItem(ALIAS_PREFIX + row.ip + row.domain, alias);
             return resolve();
         }
         if (row.disabled) {
             const list = getDisableList().map(item => {
-                if (item.ip === row.ip && item.domain === item.domain) {
+                if (item.ip === row.ip && item.domain === row.domain) {
                     return Object.assign({}, row, {
                         alias: ''
                     });
@@ -135,7 +135,7 @@ export function setAlias(alias, row) {
             localStorage.setItem(ALIAS_PREFIX + 'disabledList', JSON.stringify(list));
             return resolve();
         }
-        localStorage.removeItem(ALIAS_PREFIX + row.ip);
+        localStorage.removeItem(ALIAS_PREFIX + row.ip + row.domain);
         return resolve();
     });
 }
