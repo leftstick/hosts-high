@@ -7,112 +7,117 @@
 </template>
 
 <script>
-import {hasPermission, prompt} from './secure/Permission';
-import {isPermissionSet, addPermission, get, add, remove, toggleDisable, setAlias} from './service/HostsService';
+import {
+  add,
+  addPermission,
+  get,
+  isPermissionSet,
+  remove,
+  setAlias,
+  toggleDisable
+} from './service/HostsService'
+import { hasPermission, prompt } from './secure/Permission'
 
-import quickAdd from './ui/quickAdd';
-import hostsFilter from './ui/hostsFilter';
-import list from './ui/list';
+import hostsFilter from './ui/hostsFilter'
+import list from './ui/list'
+import quickAdd from './ui/quickAdd'
 
 export default {
-    data() {
-        return {
-            rawHosts: [],
-            filterTxt: ''
-        };
-    },
-    computed: {
-        hosts() {
-            return this.rawHosts.filter(h => {
-                if (!this.filterTxt) {
-                    return true;
-                }
-                if (h.alias && h.alias.includes(this.filterTxt)) {
-                    return true;
-                }
-                if (h.ip.includes(this.filterTxt)) {
-                    return true;
-                }
-                if (h.domain.includes(this.filterTxt)) {
-                    return true;
-                }
-                return false;
-            });
+  components: {
+    hostsFilter,
+    list,
+    quickAdd
+  },
+  computed: {
+    hosts() {
+      return this.rawHosts.filter(h => {
+        if (!this.filterTxt) {
+          return true
         }
-    },
-    created() {
-        hasPermission()
-            .then(() => {}, e => prompt())
-            .then(() => {
-                if (!isPermissionSet()) {
-                    addPermission();
-                    require('electron').remote.getCurrentWindow().reload();
-                }
-            })
-            .catch(e => {
-                this.$alert(e.message, 'Warning');
-            });
-        
-        this.fetchHosts();
-    },
-
-    methods: {
-        acquirePermission() {
-            return prompt()
-                .then(() => {
-                    if (!isPermissionSet()) {
-                        addPermission();
-                    }
-                })
-                .then(this.fetchHosts)
-                .catch((e) => {
-                    this.fetchHosts();
-                    this.$alert(e.message, 'Warning');
-                });
-        },
-        fetchHosts() {
-            get()
-                .then(hosts => {
-                    this.rawHosts = hosts;
-                });
-        },
-        onAdd(item) {
-            add(item)
-                .then(this.fetchHosts, this.acquirePermission);
-        },
-        onDelete(item) {
-            remove(item)
-                .then(this.fetchHosts, this.acquirePermission);
-        },
-        onToggle(item) {
-            toggleDisable(item)
-                .then(this.fetchHosts, this.acquirePermission);
-        },
-        onAlias(data) {
-            setAlias(data.alias, data.host)
-                .then(this.fetchHosts);
-            
-        },
-        filterHosts(txt) {
-            this.filterTxt = txt;
+        if (h.alias && h.alias.includes(this.filterTxt)) {
+          return true
         }
-    },
-
-    components: {
-        quickAdd,
-        hostsFilter,
-        list
+        if (h.ip.includes(this.filterTxt)) {
+          return true
+        }
+        if (h.domain.includes(this.filterTxt)) {
+          return true
+        }
+        return false
+      })
     }
-};
+  },
 
+  created() {
+    hasPermission()
+      .then(() => {}, e => prompt())
+      .then(() => {
+        if (!isPermissionSet()) {
+          addPermission()
+          require('electron')
+            .remote.getCurrentWindow()
+            .reload()
+        }
+      })
+      .catch(e => {
+        this.$alert(e.message, 'Warning')
+      })
+
+    this.fetchHosts()
+  },
+
+  data() {
+    return {
+      filterTxt: '',
+      rawHosts: []
+    }
+  },
+
+  methods: {
+    acquirePermission() {
+      return prompt()
+        .then(() => {
+          if (!isPermissionSet()) {
+            addPermission()
+          }
+        })
+        .then(this.fetchHosts)
+        .catch(e => {
+          this.fetchHosts()
+          this.$alert(e.message, 'Warning')
+        })
+    },
+    fetchHosts() {
+      get().then(hosts => {
+        this.rawHosts = hosts
+      })
+    },
+    filterHosts(txt) {
+      this.filterTxt = txt
+    },
+    onAdd(item) {
+      add(item).then(this.fetchHosts, this.acquirePermission)
+    },
+    onAlias(data) {
+      setAlias(data.alias, data.host).then(this.fetchHosts)
+    },
+    onDelete(item) {
+      remove(item).then(this.fetchHosts, this.acquirePermission)
+    },
+
+    onToggle(item) {
+      toggleDisable(item).then(this.fetchHosts, this.acquirePermission)
+    }
+  }
+}
 </script>
 
 <style scoped>
-    #root {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 15px;
-    }
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
 </style>

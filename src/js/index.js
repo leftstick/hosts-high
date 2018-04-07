@@ -1,42 +1,34 @@
-import Vue from 'vue';
-import ElementUI from 'element-ui';
-import hosts from './hosts';
+import ElementUI from 'element-ui'
+import Vue from 'vue'
+import hosts from './hosts'
 
-import locale from 'element-ui/lib/locale/lang/en';
+import locale from 'element-ui/lib/locale/lang/en'
 
 class App {
+  constructor() {
+    Vue.use(ElementUI, {
+      locale
+    })
+    // eslint-disable-next-line
+    Vue.config.devtools = __DEV__
+  }
 
-    constructor() {
-        Vue.use(ElementUI, {
-            locale
-        });
-        //eslint-disable-next-line
-        Vue.config.devtools = __DEV__;
-    }
+  destroySplash() {
+    document.head.removeChild(document.querySelector('#splash-spinner'))
+    document.body.removeChild(document.querySelector('.spinner'))
+  }
 
-    createVueOpts() {
-        this.vueOps = {
-            components: {
-                hosts
-            }
-        };
-    }
+  launch() {
+    this.vue = new Vue({
+      render: h => h(hosts)
+    })
+    this.vue.$mount('#application')
+  }
 
-    destroySplash() {
-        document.head.removeChild(document.querySelector('#splash-spinner'));
-        document.body.removeChild(document.querySelector('.spinner'));
-    }
-
-    launch() {
-        new Vue(this.vueOps).$mount('#application');
-    }
-
-    run() {
-        this.createVueOpts();
-        this.destroySplash();
-        this.launch();
-    }
-
+  run() {
+    this.destroySplash()
+    this.launch()
+  }
 }
 
-new App().run();
+new App().run()
