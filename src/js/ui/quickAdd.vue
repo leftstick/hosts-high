@@ -15,7 +15,7 @@
         <el-input v-model="item.ip" placeholder="IP Address" size="30"></el-input>
       </el-form-item>
       <el-form-item class="domain" prop="domain">
-        <el-input v-model="item.domain" placeholder="Domain names" size="50"></el-input>
+        <el-input v-model="item.domain" placeholder="Domain names" size="50" style="width:300px"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="default" icon="el-icon-document" @click="onSubmit"></el-button>
