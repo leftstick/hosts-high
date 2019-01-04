@@ -1,9 +1,9 @@
 <template>
-    <div id="root">
-       <quick-add @add="onAdd"></quick-add>
-       <hosts-filter @change="filterHosts"></hosts-filter>
-       <list :data="hosts" @delete="onDelete" @toggle="onToggle" @alias="onAlias"></list>
-    </div>
+  <div id="root">
+    <quick-add @add="onAdd"></quick-add>
+    <hosts-filter @change="filterHosts"></hosts-filter>
+    <list :data="hosts" @delete="onDelete" @toggle="onToggle" @alias="onAlias"></list>
+  </div>
 </template>
 
 <script>

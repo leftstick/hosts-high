@@ -1,15 +1,13 @@
 {
-  "presets": [["env", { "modules": false }]],
+  "presets": [["@babel/preset-env", { "modules": false }]],
   "plugins": [
-    "transform-object-rest-spread",
+    "@babel/plugin-proposal-object-rest-spread",
     [
       "component",
-      [
-        {
-          "libraryName": "element-ui",
-          "styleLibraryName": "theme-chalk"
-        }
-      ]
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
     ]
   ]
 }

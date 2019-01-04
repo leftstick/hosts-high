@@ -1,49 +1,44 @@
 <template>
-    <div class="list">
-        <el-table :data="list"
-                  border
-                  style="width: 100%"
-                  @row-dblclick="handleDoubleClick"
-                  :height="listHeight">
-            <el-table-column label="Alias"
-                             width="100"
-                             :context="_self">
-              <template slot-scope="scope">
-                <div class="alias">
-                    <div v-if="!scope.row.editable">{{ scope.row.alias || '' }}</div>
-                    <el-input v-if="scope.row.editable"
-                              autofocus
-                              :value="scope.row.alias"
-                              @blur="updateAlias(arguments[0].target.value, scope.row, arguments[0].target)"></el-input>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column prop="ip"
-                             label="IP Address"
-                             width="180"></el-table-column>
-            <el-table-column prop="domain"
-                             label="Domain"></el-table-column>
-            <el-table-column :context="_self"
-                             label="Oper"
-                             width="130">
-              <template slot-scope="scope">
-                <div class="oper">
-                 <el-switch :width="40"
-                               v-model="scope.row.enabled"
-                               on-color="#13ce66"
-                               off-color="#ff4949"
-                               on-text=""
-                               off-text=""
-                               @change="toggle(arguments[0], scope.row)"></el-switch>
-                    <el-button size="medium" 
-                               type="text"
-                               icon="el-icon-delete"
-                               @click="deleteItem(scope.row)"></el-button>
-                </div>
-              </template>
-            </el-table-column>
-        </el-table>
-    </div>
+  <div class="list">
+    <el-table :data="list" border style="width: 100%" @row-dblclick="handleDoubleClick" :height="listHeight">
+      <el-table-column label="Alias" width="100" :context="_self">
+        <template slot-scope="scope">
+          <div class="alias">
+            <div v-if="!scope.row.editable">{{ scope.row.alias || '' }}</div>
+            <el-input
+              v-if="scope.row.editable"
+              autofocus
+              :value="scope.row.alias"
+              @blur="updateAlias(arguments[0].target.value, scope.row, arguments[0].target)"
+            ></el-input>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column prop="ip" label="IP Address" width="180"></el-table-column>
+      <el-table-column prop="domain" label="Domain"></el-table-column>
+      <el-table-column :context="_self" label="Oper" width="130">
+        <template slot-scope="scope">
+          <div class="oper">
+            <el-switch
+              :width="40"
+              v-model="scope.row.enabled"
+              on-color="#13ce66"
+              off-color="#ff4949"
+              on-text
+              off-text
+              @change="toggle(arguments[0], scope.row)"
+            ></el-switch>
+            <el-button
+              size="medium"
+              type="text"
+              icon="el-icon-delete"
+              @click="deleteItem(scope.row)"
+            ></el-button>
+          </div>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
@@ -82,7 +77,9 @@ export default {
       })
     },
     deleteItem(item) {
-      this.$confirm('Are you sure deleting this rule?', 'Confirm', { type: 'warning' }).then(
+      this.$confirm('Are you sure deleting this rule?', 'Confirm', {
+        type: 'warning'
+      }).then(
         () => {
           this.$emit('delete', eraseGetter(item))
         },

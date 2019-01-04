@@ -1,6 +1,7 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   devServer: {
@@ -27,15 +28,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: [
-          {
-            loader: 'vue-loader',
-            options: {
-              extractCSS: false,
-              preserveWhitespace: false
-            }
-          }
-        ]
+        use: ['vue-loader']
       },
       {
         exclude: /node_modules/,
@@ -57,6 +50,7 @@ module.exports = {
     path: resolve(__dirname, 'build')
   },
   plugins: [
+    new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       __DEV__: true
     }),

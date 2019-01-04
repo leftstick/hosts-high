@@ -1,20 +1,27 @@
 <template>
-    <div class="quick-add">
-        <el-form ref="quickAdd" :inline="true" :model="item" :rules="rule" @keyup.native.enter.stop.prevent="onSubmit" @submit.native.prevent>
-            <el-form-item prop="alias">
-                <el-input ref="alias" v-model="item.alias" placeholder="Alias"></el-input>
-            </el-form-item>
-            <el-form-item prop="ip">
-                <el-input v-model="item.ip" placeholder="IP Address" size="30"></el-input>
-            </el-form-item>
-            <el-form-item class="domain" prop="domain">
-                <el-input v-model="item.domain" placeholder="Domain names" size="50"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="default" icon="el-icon-document" @click="onSubmit"></el-button>
-            </el-form-item>
-        </el-form>
-    </div>
+  <div class="quick-add">
+    <el-form
+      ref="quickAdd"
+      :inline="true"
+      :model="item"
+      :rules="rule"
+      @keyup.native.enter.stop.prevent="onSubmit"
+      @submit.native.prevent
+    >
+      <el-form-item prop="alias">
+        <el-input ref="alias" v-model="item.alias" placeholder="Alias"></el-input>
+      </el-form-item>
+      <el-form-item prop="ip">
+        <el-input v-model="item.ip" placeholder="IP Address" size="30"></el-input>
+      </el-form-item>
+      <el-form-item class="domain" prop="domain">
+        <el-input v-model="item.domain" placeholder="Domain names" size="50"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="default" icon="el-icon-document" @click="onSubmit"></el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
 <script>

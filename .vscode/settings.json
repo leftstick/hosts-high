@@ -3,11 +3,13 @@
   "editor.formatOnSave": true,
   "eslint.enable": true,
   "prettier.disableLanguages": ["vue"],
+  "vetur.format.defaultFormatter.html": "none",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     {
-      "language": "vue"
+      "language": "vue",
+      "autoFix": true
     }
   ]
 }

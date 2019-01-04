@@ -9,7 +9,7 @@
     "browser": true
   },
   "extends": ["plugin:vue/base", "standard", "prettier", "prettier/standard"],
-  "plugins": ["prettier", "standard"],
+  "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
     "prefer-const": [
@@ -19,7 +19,6 @@
         "ignoreReadBeforeAssign": false
       }
     ],
-    "sort-keys": ["error", "asc", { "caseSensitive": true, "natural": false }],
     "sort-vars": ["error"],
     "sort-imports": [
       "error",
@@ -29,6 +28,7 @@
         "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
       }
     ],
-    "prefer-promise-reject-errors": "off"
+    "prefer-promise-reject-errors": "off",
+    "max-len": ["off"]
   }
 }
