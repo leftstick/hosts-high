@@ -6,7 +6,7 @@ module.exports = [
     label: 'Application',
     submenu: [
       {
-        label: 'About Hosts High',
+        label: 'About Hosts Master',
         click: function() {
           new BrowserWindow({
             parent: BrowserWindow.getFocusedWindow(),

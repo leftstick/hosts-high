@@ -1,4 +1,4 @@
-import { HOSTS } from '../secure/OS'
+import { HOSTS } from '@/helpers/os'
 import hostile from 'hostile'
 
 const ALIAS_PREFIX = 'hosts_alias_'
@@ -55,11 +55,7 @@ export function add(host) {
         hostile.set(host.ip, host.domain, err => {
           if (err) {
             return reject(
-              'failed adding ' +
-                host.ip +
-                '\n\n Please Make sure you have permission to modify ' +
-                HOSTS +
-                ' file'
+              'failed adding ' + host.ip + '\n\n Please Make sure you have permission to modify ' + HOSTS + ' file'
             )
           }
           if (host.alias) {
@@ -85,11 +81,7 @@ export function remove(host) {
     hostile.remove(host.ip, host.domain, err => {
       if (err) {
         return reject(
-          'failed deleting ' +
-            host.ip +
-            '\n\n Please Make sure you have permission to modify ' +
-            HOSTS +
-            ' file'
+          'failed deleting ' + host.ip + '\n\n Please Make sure you have permission to modify ' + HOSTS + ' file'
         )
       }
       localStorage.removeItem(ALIAS_PREFIX + host.ip + host.domain)
@@ -150,12 +142,4 @@ export function setAlias(alias, row) {
     localStorage.removeItem(ALIAS_PREFIX + row.ip + row.domain)
     return resolve()
   })
-}
-
-export function addPermission() {
-  localStorage.setItem(ALIAS_PREFIX + 'permission', 'true')
-}
-
-export function isPermissionSet() {
-  return !!localStorage.getItem(ALIAS_PREFIX + 'permission')
 }

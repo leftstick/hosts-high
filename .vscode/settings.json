@@ -1,15 +1,5 @@
 // Place your settings in this file to overwrite default and user settings.
 {
   "editor.formatOnSave": true,
-  "eslint.enable": true,
-  "prettier.disableLanguages": ["vue"],
-  "vetur.format.defaultFormatter.html": "none",
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    {
-      "language": "vue",
-      "autoFix": true
-    }
-  ]
+  "eslint.enable": true
 }

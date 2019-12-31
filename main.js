@@ -1,7 +1,6 @@
 process.env.ELECTRON_HIDE_INTERNAL_MODULES = 'true'
 
 const electron = require('electron')
-const fs = require('fs')
 const path = require('path')
 const app = electron.app
 const Menu = electron.Menu
@@ -29,7 +28,10 @@ const startupOpts = {
   frame: true,
   disableAutoHideCursor: false,
   autoHideMenuBar: false,
-  titleBarStyle: 'default'
+  titleBarStyle: 'default',
+  webPreferences: {
+    nodeIntegration: true
+  }
 }
 
 app.on('ready', function() {
@@ -39,7 +41,7 @@ app.on('ready', function() {
 
   if (process.env.NODE_ENV === 'dev') {
     setTimeout(function() {
-      mainWindow.loadURL('http://localhost:8080/index.html')
+      mainWindow.loadURL('http://localhost:8000/')
     }, 5000)
   } else {
     mainWindow.loadURL('file://' + path.resolve(__dirname, 'build', 'index.html'))
