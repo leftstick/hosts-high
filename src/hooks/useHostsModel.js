@@ -12,16 +12,28 @@ function useHostsModel() {
 
   const hosts = useMemo(() => sortWithDisabledHosts(sysHosts, disabledHosts), [sysHosts, disabledHosts])
 
-  const createHost = useCallback(
+  const addDisabledHost = useCallback(
     host => {
       return new Promise((resolve, reject) => {
-        const isDefined = hosts.some(h => h.ip === host.ip && h.domain === host.domain && h.disabled === host.disabled)
+        const isDefined = disabledHosts.some(h => h.ip === host.ip && h.domain === host.domain)
         if (isDefined) {
           return reject(`host [${host.ip} ${host.domain}] has been used`)
         }
-        if (host.disabled) {
-          setDisabledHosts([...disabledHosts, host])
-          return resolve()
+        const temp = [...disabledHosts, { ...host, disabled: true }]
+        setDisabledHosts(temp)
+        return resolve(temp)
+      })
+    },
+    [disabledHosts, setDisabledHosts]
+  )
+
+  const addSysHost = useCallback(
+    (host, realSysHosts) => {
+      return new Promise((resolve, reject) => {
+        const neededSysHosts = realSysHosts || sysHosts
+        const isDefined = neededSysHosts.some(h => h.ip === host.ip && h.domain === host.domain)
+        if (isDefined) {
+          return reject(`host [${host.ip} ${host.domain}] has been used`)
         }
         hostile.set(host.ip, host.domain, err => {
           if (err) {
@@ -30,31 +42,60 @@ function useHostsModel() {
           if (host.alias) {
             setAliases({ ...aliases, [host.ip + host.domain]: host.alias })
           }
-          setSysHosts([...sysHosts, host])
-          resolve()
+          const temp = [...neededSysHosts, { ...host, disabled: false }]
+          setSysHosts(temp)
+          resolve(temp)
         })
       })
     },
-    [disabledHosts, sysHosts, aliases, setAliases, hosts, setDisabledHosts]
+    [sysHosts, setSysHosts, setAliases, aliases]
   )
 
-  const removeHost = useCallback(
+  const createHost = useCallback(
+    host => {
+      if (host.disabled) {
+        return addDisabledHost(host)
+      }
+      return addSysHost(host)
+    },
+    [addDisabledHost, addSysHost]
+  )
+
+  const deleteDisabledHost = useCallback(
+    host => {
+      return new Promise(resolve => {
+        const temp = disabledHosts.filter(h => !(h.ip === host.ip && h.domain === host.domain))
+        setDisabledHosts(temp)
+        return resolve(temp)
+      })
+    },
+    [disabledHosts, setDisabledHosts]
+  )
+
+  const deleteSysHost = useCallback(
     host => {
       return new Promise((resolve, reject) => {
-        if (host.disabled) {
-          setDisabledHosts(disabledHosts.filter(h => h.ip !== host.ip && h.domain !== host.domain))
-          return resolve()
-        }
         hostile.remove(host.ip, host.domain, err => {
           if (err) {
             return reject(`Failed to delete [${host.ip} ${host.domain}]: ${err.message}`)
           }
-          setSysHosts(sysHosts.filter(h => !(h.ip === host.ip && h.domain === host.domain)))
-          resolve()
+          const temp = sysHosts.filter(h => !(h.ip === host.ip && h.domain === host.domain))
+          setSysHosts(temp)
+          resolve(temp)
         })
       })
     },
-    [disabledHosts, setDisabledHosts, sysHosts]
+    [sysHosts, setSysHosts]
+  )
+
+  const removeHost = useCallback(
+    host => {
+      if (host.disabled) {
+        return deleteDisabledHost(host)
+      }
+      return deleteSysHost(host)
+    },
+    [deleteDisabledHost, deleteSysHost]
   )
 
   const modifyHost = useCallback(
@@ -74,7 +115,7 @@ function useHostsModel() {
         if (newHost.disabled) {
           setDisabledHosts(
             disabledHosts.map(h => {
-              if (h.ip === newHost.ip && h.domain === newHost.domain) {
+              if (h.ip === oldHost.ip && h.domain === oldHost.domain) {
                 return newHost
               }
               return h
@@ -83,12 +124,12 @@ function useHostsModel() {
           return resolve()
         }
 
-        removeHost(oldHost)
-          .then(() => createHost(newHost))
+        deleteSysHost(oldHost)
+          .then(realSysHosts => addSysHost(newHost, realSysHosts))
           .then(resolve, reject)
       })
     },
-    [disabledHosts, setDisabledHosts, createHost, hosts, removeHost]
+    [setDisabledHosts, deleteSysHost, addSysHost, disabledHosts, hosts]
   )
 
   const toggleHostState = useCallback(
@@ -96,16 +137,16 @@ function useHostsModel() {
       const newHost = { ...host, disabled: !host.disabled }
       return new Promise((resolve, reject) => {
         if (host.disabled) {
-          setDisabledHosts(disabledHosts.filter(h => h.ip !== host.ip && h.domain !== host.domain))
-          return createHost(newHost).then(resolve, reject)
+          return deleteDisabledHost(host)
+            .then(() => addSysHost(newHost))
+            .then(resolve, reject)
         }
-        removeHost(host).then(() => {
-          setDisabledHosts([...disabledHosts, newHost])
-          resolve()
-        }, reject)
+        deleteSysHost(host)
+          .then(() => addDisabledHost(newHost))
+          .then(resolve, reject)
       })
     },
-    [disabledHosts, createHost, removeHost, setDisabledHosts]
+    [deleteDisabledHost, addSysHost, deleteSysHost, addDisabledHost]
   )
 
   useEffect(() => {
