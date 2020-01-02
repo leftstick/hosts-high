@@ -1,6 +1,6 @@
 #build
-build/
 dist/
+output/
 
 #npm
 npm-debug.log

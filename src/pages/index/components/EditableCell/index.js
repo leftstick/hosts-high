@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { useClickAway } from '@umijs/hooks'
 
 import { isIp, isDomains } from '@/helpers/object'
+import usePermissionModel from '@/hooks/usePermissionModel'
 import useHostsModel from '@/hooks/useHostsModel'
 
 import styles from '@/pages/index/components/EditableCell/index.less'
@@ -12,6 +13,7 @@ import styles from '@/pages/index/components/EditableCell/index.less'
 const EditArea = Form.create()(RawEditArea)
 
 function EditableCell({ record, property }) {
+  const { acquired } = usePermissionModel()
   const [editing, setEditing] = useState(false)
   const { modifyHost } = useHostsModel()
   const ref = useClickAway(() => {
@@ -23,7 +25,7 @@ function EditableCell({ record, property }) {
       <div
         style={{ height: '21px', width: '100%' }}
         onDoubleClick={() => {
-          setEditing(true)
+          acquired && setEditing(true)
         }}
       >
         {record[property]}

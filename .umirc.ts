@@ -3,6 +3,8 @@ import { IConfig } from 'umi-types'
 export default {
   hash: true,
   treeShaking: true,
+  outputPath: 'output',
+  publicPath: './',
   history: 'hash',
   chainWebpack(config, { webpack }) {
     config
