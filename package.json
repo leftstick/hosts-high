@@ -1,6 +1,6 @@
 {
   "name": "hosts",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Manage hosts easily",
   "main": "src/main/index.js",
   "scripts": {

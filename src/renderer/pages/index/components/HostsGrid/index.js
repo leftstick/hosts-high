@@ -57,6 +57,7 @@ function HostsGrid({ size }) {
   return (
     <div className={styles.grid} style={{ width: `${size.width}px`, height: `${size.height}px` }}>
       <Input
+        autoFocus
         placeholder="Type anything to filter..."
         className={styles.searchInput}
         onChange={e => setSearchText(e.target.value)}

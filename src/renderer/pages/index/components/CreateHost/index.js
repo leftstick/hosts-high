@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Button, Drawer, Form, Input, Tooltip } from 'antd'
 import PropTypes from 'prop-types'
 
@@ -7,6 +7,7 @@ import usePermissionModel from '@/hooks/usePermissionModel'
 import useHostsModel from '@/hooks/useHostsModel'
 
 function CreateHost({ form }) {
+  const inputEl = useRef(null)
   const [drawerVisable, setDrawerVisable] = useState(false)
   const { acquired } = usePermissionModel()
   const { createHost } = useHostsModel()
@@ -61,6 +62,9 @@ function CreateHost({ form }) {
         onClose={() => {
           setDrawerVisable(false)
         }}
+        afterVisibleChange={vis => {
+          vis && inputEl.current.focus()
+        }}
       >
         <Form onSubmit={saveHost}>
           <Form.Item
@@ -103,7 +107,7 @@ function CreateHost({ form }) {
                   }
                 }
               ]
-            })(<Input placeholder="input your host" />)}
+            })(<Input ref={inputEl} placeholder="input your host" />)}
           </Form.Item>
         </Form>
       </Drawer>
