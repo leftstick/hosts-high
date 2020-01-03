@@ -16,8 +16,7 @@
     "files": [
       "build/",
       "output/",
-      "system/",
-      "main.js"
+      "src/main"
     ]
   },
   "author": "Howard.Zuo",
