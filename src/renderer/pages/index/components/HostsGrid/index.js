@@ -61,9 +61,13 @@ function HostsGrid({ size }) {
         className={styles.searchInput}
         onChange={e => setSearchText(e.target.value)}
       />
-      <div className="ag-theme-balham" style={{ width: `${size.width}px`, height: `${size.height - 32}px` }}>
+      <div
+        className="ag-theme-balham"
+        style={{ width: `${size.width}px`, height: `${size.height - 32}px`, maxHeight: `${size.height - 32}px` }}
+      >
         <Table
           bordered
+          scroll={{ y: size.height - 32 - 38 }}
           pagination={false}
           className={styles.dataContainer}
           columns={columnDefs}

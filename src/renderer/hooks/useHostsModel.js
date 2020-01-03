@@ -191,15 +191,16 @@ function getSysHosts(aliases) {
 function sortWithDisabledHosts(sysHosts, disabledHosts) {
   const hosts = [...sysHosts, ...disabledHosts]
   hosts.sort((a, b) => {
-    const aa = a.ip.split('.')
-    const bb = b.ip.split('.')
-    return (
-      aa[0] * 0x1000000 +
-      aa[1] * 0x10000 +
-      aa[2] * 0x100 +
-      aa[3] * 1 -
-      (bb[0] * 0x1000000 + bb[1] * 0x10000 + bb[2] * 0x100 + bb[3] * 1)
-    )
+    const aip = a.ip.split('.')
+    const bip = b.ip.split('.')
+    for (let i = 0; i < aip.length; i++) {
+      if ((aip[i] = parseInt(aip[i])) < (b[i] = parseInt(bip[i]))) {
+        return -1
+      } else if (aip[i] > bip[i]) {
+        return 1
+      }
+    }
+    return 0
   })
   return hosts
 }

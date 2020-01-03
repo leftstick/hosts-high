@@ -21,7 +21,6 @@ const startupOpts = {
   alwaysOnTop: false,
   fullscreen: false,
   skipTaskbar: false,
-  icon: `${__dirname}/build/hosts.png`,
   kiosk: false,
   title: '',
   show: false,
@@ -30,8 +29,7 @@ const startupOpts = {
   autoHideMenuBar: false,
   titleBarStyle: 'default',
   webPreferences: {
-    nodeIntegration: true,
-    webSecurity: false
+    nodeIntegration: true
   }
 }
 
@@ -45,7 +43,7 @@ app.on('ready', function() {
       mainWindow.loadURL('http://localhost:8000/')
     }, 5000)
   } else {
-    mainWindow.loadURL('file://' + path.resolve(__dirname, 'output', 'index.html'))
+    mainWindow.loadURL('file://' + path.resolve(__dirname, '..', '..', 'output', 'index.html'))
   }
 
   mainWindow.on('closed', function() {
