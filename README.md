@@ -1,6 +1,6 @@
 # hosts
 
-![](https://img.shields.io/badge/hosts-3.0.0-blue.svg)
+![](https://img.shields.io/badge/hosts-3.0.1-blue.svg)
 ![][david-url]
 
 This is a tiny tool for quick managing hosts file
@@ -13,7 +13,7 @@ Since modifying hosts file require root privileges, you may need to approve it o
 
 # Download
 
-- Mac 11.11+: [64bit](https://github.com/leftstick/hosts-high/releases/download/3.0.0/hostmaster-3.0.0-darwin.zip)
+- Mac 11.11+: [64bit](https://github.com/leftstick/hosts-high/releases/download/3.0.1/hostmaster-3.0.1-darwin.zip)
 
 ## How To Contribute
 
