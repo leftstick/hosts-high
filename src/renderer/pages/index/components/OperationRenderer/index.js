@@ -1,8 +1,8 @@
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
 
-import usePermissionModel from '@/hooks/usePermissionModel'
-import useHostsModel from '@/hooks/useHostsModel'
+import usePermissionModel from '@/stores/usePermissionModel'
+import useHostsModel from '@/stores/useHostsModel'
 
 import styles from '@/pages/index/components/OperationRenderer/index.less'
 

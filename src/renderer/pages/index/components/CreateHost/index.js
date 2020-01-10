@@ -3,8 +3,8 @@ import { Button, Drawer, Form, Input, Tooltip } from 'antd'
 import PropTypes from 'prop-types'
 
 import { isIp, isDomains } from '@/helpers/object'
-import usePermissionModel from '@/hooks/usePermissionModel'
-import useHostsModel from '@/hooks/useHostsModel'
+import usePermissionModel from '@/stores/usePermissionModel'
+import useHostsModel from '@/stores/useHostsModel'
 
 function CreateHost({ form }) {
   const inputEl = useRef(null)

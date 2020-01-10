@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import OperationRenderer from '@/pages/index/components/OperationRenderer'
 import EditableCell from '@/pages/index/components/EditableCell'
-import useHostsModel from '@/hooks/useHostsModel'
+import useHostsModel from '@/stores/useHostsModel'
 
 import styles from '@/pages/index/components/HostsGrid/index.less'
 

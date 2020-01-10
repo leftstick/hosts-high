@@ -2,7 +2,7 @@ import { Icon, Tooltip } from 'antd'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import usePermissionModel from '@/hooks/usePermissionModel'
+import usePermissionModel from '@/stores/usePermissionModel'
 import { HOSTS } from '@/helpers/os'
 
 import styles from '@/pages/index/components/EditableStatus/index.less'
