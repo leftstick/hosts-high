@@ -5,25 +5,40 @@ import hostile from 'hostile'
 
 const ALIAS_PREFIX = 'hosts_alias'
 
+function getFromStorage(key, defaultValue) {
+  if (!key) {
+    return defaultValue
+  }
+  const raw = window.localStorage.getItem(key)
+  if (!raw) {
+    return defaultValue
+  }
+  return JSON.parse(raw)
+}
+
+const DISABLED_HOSTS_KEY = `${ALIAS_PREFIX}_disabledHosts`
+const ALIAS_KEY = `${ALIAS_PREFIX}_aliases`
+
 function useHostsModel() {
   const [sysHosts, setSysHosts] = useState([])
-  const [disabledHosts, setDisabledHosts] = useLocalStorageState(`${ALIAS_PREFIX}_disabledHosts`, [])
-  const [aliases, setAliases] = useLocalStorageState(`${ALIAS_PREFIX}_aliases`, {})
+  const [disabledHosts, setDisabledHosts] = useLocalStorageState(DISABLED_HOSTS_KEY, [])
+  const [aliases, setAliases] = useLocalStorageState(ALIAS_KEY, {})
 
   const hosts = useMemo(() => sortWithDisabledHosts(sysHosts, disabledHosts), [sysHosts, disabledHosts])
 
   const addDisabledHost = useCallback(
     host => {
       return new Promise((resolve, reject) => {
+        const disabledHosts = getFromStorage(DISABLED_HOSTS_KEY, [])
         const isDefined = disabledHosts.some(h => h.ip === host.ip && h.domain === host.domain)
         if (isDefined) {
           return reject(`host [${host.ip} ${host.domain}] has been used`)
         }
-        setDisabledHosts([...disabledHosts, { ...host, disabled: true }])
+        setDisabledHosts(disabledHosts => [...disabledHosts, { ...host, disabled: true }])
         return resolve()
       })
     },
-    [disabledHosts, setDisabledHosts]
+    [setDisabledHosts]
   )
 
   const addSysHost = useCallback(
@@ -39,9 +54,7 @@ function useHostsModel() {
             if (err) {
               return reject(`Failed to add [${host.ip} ${host.domain}]: ${err.message}`)
             }
-            if (host.alias) {
-              setAliases({ ...aliases, [host.ip + host.domain]: host.alias })
-            }
+            setAliases({ ...aliases, [host.ip + host.domain]: host.alias })
             setSysHosts(sysHosts => [...sysHosts, { ...host, disabled: false, alias: aliases[host.ip + host.domain] }])
             resolve()
           })
@@ -64,11 +77,11 @@ function useHostsModel() {
   const deleteDisabledHost = useCallback(
     host => {
       return new Promise(resolve => {
-        setDisabledHosts(disabledHosts.filter(h => !(h.ip === host.ip && h.domain === host.domain)))
+        setDisabledHosts(disabledHosts => disabledHosts.filter(h => !(h.ip === host.ip && h.domain === host.domain)))
         return resolve()
       })
     },
-    [disabledHosts, setDisabledHosts]
+    [setDisabledHosts]
   )
 
   const deleteSysHost = useCallback(
