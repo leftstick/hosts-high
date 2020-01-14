@@ -13,7 +13,7 @@ Since modifying hosts file require root privileges, you may need to approve it o
 
 # Download
 
-- Mac 11.11+: [64bit](https://github.com/leftstick/hosts-high/releases/download/3.0.2/Hosts%20Master-3.0.2-mac.zip)
+- Mac 11.11+: [64bit](https://github.com/leftstick/hosts-high/releases/download/3.0.2/Hosts.Master-3.0.2-mac.zip)
 
 ## How To Contribute
 
