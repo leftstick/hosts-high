@@ -1,5 +1,4 @@
 import { useEffect, useCallback } from 'react'
-import { createModel } from 'hox'
 import { R_OK, W_OK, access } from 'fs'
 import sudo from 'sudo-prompt'
 import { useLocalStorageState } from '@umijs/hooks'
@@ -48,7 +47,7 @@ function usePermissionModel() {
   }
 }
 
-export default createModel(usePermissionModel)
+export default usePermissionModel
 
 function requestPermission() {
   const options = {

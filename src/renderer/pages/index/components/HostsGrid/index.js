@@ -2,15 +2,16 @@ import { useState, useMemo } from 'react'
 import { Input, Table } from 'antd'
 import PropTypes from 'prop-types'
 
+import { useModel } from 'umi'
+
 import OperationRenderer from '@/pages/index/components/OperationRenderer'
 import EditableCell from '@/pages/index/components/EditableCell'
-import useHostsModel from '@/stores/useHostsModel'
 
 import styles from '@/pages/index/components/HostsGrid/index.less'
 
 function HostsGrid({ size }) {
   const [searchText, setSearchText] = useState('')
-  const { hosts } = useHostsModel()
+  const { hosts } = useModel('useHostsModel')
   const displayHosts = useMemo(() => {
     return hosts.filter(h => {
       if (!searchText) {

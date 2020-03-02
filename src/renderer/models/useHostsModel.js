@@ -1,5 +1,4 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
-import { createModel } from 'hox'
 import { useLocalStorageState } from '@umijs/hooks'
 import hostile from 'hostile'
 
@@ -175,7 +174,7 @@ function useHostsModel() {
   }
 }
 
-export default createModel(useHostsModel)
+export default useHostsModel
 
 function getSysHosts(aliases) {
   return new Promise(function(resolve, reject) {

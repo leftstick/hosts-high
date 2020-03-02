@@ -1,14 +1,13 @@
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
 
-import usePermissionModel from '@/stores/usePermissionModel'
-import useHostsModel from '@/stores/useHostsModel'
+import { useModel } from 'umi'
 
 import styles from '@/pages/index/components/OperationRenderer/index.less'
 
 function OperationRenderer({ data }) {
-  const { acquired } = usePermissionModel()
-  const { toggleHostState, removeHost } = useHostsModel()
+  const { acquired } = useModel('usePermissionModel')
+  const { toggleHostState, removeHost } = useModel('useHostsModel')
 
   return (
     <div className={styles.oper}>

@@ -2,20 +2,17 @@ import { useState } from 'react'
 import { Input, Form } from 'antd'
 import PropTypes from 'prop-types'
 
+import { useModel } from 'umi'
 import { useClickAway } from '@umijs/hooks'
 
 import { isIp, isDomains } from '@/helpers/object'
-import usePermissionModel from '@/stores/usePermissionModel'
-import useHostsModel from '@/stores/useHostsModel'
 
 import styles from '@/pages/index/components/EditableCell/index.less'
 
-const EditArea = Form.create()(RawEditArea)
-
 function EditableCell({ record, property }) {
-  const { acquired } = usePermissionModel()
   const [editing, setEditing] = useState(false)
-  const { modifyHost } = useHostsModel()
+  const { acquired } = useModel('usePermissionModel')
+  const { modifyHost } = useModel('useHostsModel')
   const ref = useClickAway(() => {
     setEditing(false)
   })
@@ -57,51 +54,48 @@ EditableCell.propTypes = {
 
 export default EditableCell
 
-function RawEditArea({ form, property, record, onChange }) {
-  const { getFieldDecorator, validateFields } = form
-
-  function modify(e) {
-    e.preventDefault()
-
-    validateFields((err, values) => {
-      if (err) {
-        return
-      }
-      onChange && onChange(values.host)
-    })
+function EditArea({ property, record, onChange }) {
+  function modify(values) {
+    onChange && onChange(values.host)
   }
 
   return (
-    <Form className={styles.editArea} onSubmit={modify}>
-      <Form.Item>
-        {getFieldDecorator('host', {
-          initialValue: record[property],
-          rules: [
-            {
-              validator(rule, value, callback) {
-                if (['ip', 'domain'].includes(property) && !value) {
-                  return callback(`${property} is required`)
-                }
-                if ('ip' === property && !isIp(value)) {
-                  return callback('incorrect ip format')
-                }
-                if ('domain' === property && !isDomains(value)) {
-                  return callback('incorrect domains format')
-                }
-                if ('alias' === property && value.length > 15) {
-                  return callback('alias cannot be longer than 15 characters')
-                }
-                callback()
+    <Form
+      className={styles.editArea}
+      onFinish={modify}
+      initialValues={{
+        host: record[property]
+      }}
+    >
+      <Form.Item
+        name="host"
+        rules={[
+          {
+            validator(rule, value) {
+              if (['ip', 'domain'].includes(property) && !value) {
+                return Promise.reject(`${property} is required`)
               }
+              if ('ip' === property && !isIp(value)) {
+                return Promise.reject('incorrect ip format')
+              }
+              if ('domain' === property && !isDomains(value)) {
+                return Promise.reject('incorrect domains format')
+              }
+              if ('alias' === property && value.length > 15) {
+                return Promise.reject('alias cannot be longer than 15 characters')
+              }
+              return Promise.resolve()
             }
-          ]
-        })(<Input autoFocus style={{ height: '26px' }} />)}
+          }
+        ]}
+      >
+        <Input autoFocus style={{ height: '26px' }} />
       </Form.Item>
     </Form>
   )
 }
 
-RawEditArea.propTypes = {
+EditArea.propTypes = {
   form: PropTypes.object,
   record: PropTypes.object,
   property: PropTypes.string,
