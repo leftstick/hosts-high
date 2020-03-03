@@ -40,7 +40,7 @@
     "@commitlint/config-conventional": "^8.3.4",
     "babel-eslint": "^10.1.0",
     "concurrently": "^5.1.0",
-    "electron": "^8.0.2",
+    "electron": "^8.0.3",
     "electron-builder": "^22.3.2",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
@@ -63,6 +63,6 @@
     "hostile": "^1.3.2",
     "hox": "^1.0.1",
     "sudo-prompt": "^9.1.1",
-    "umi": "^3.0.0"
+    "umi": "^3.0.1"
   }
 }

@@ -16,6 +16,6 @@ export default defineConfig({
           $dirname: '__dirname'
         }
       ])
-  },
-  plugins: ['@umijs/plugin-model', '@umijs/plugin-antd']
+  }
+  // plugins: ['@umijs/plugin-model', '@umijs/plugin-antd']
 })
