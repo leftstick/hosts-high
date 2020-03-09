@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 
 import { useModel } from 'umi'
 
-import OperationRenderer from '@/pages/index/components/OperationRenderer'
-import EditableCell from '@/pages/index/components/EditableCell'
+import OperationRenderer from '../OperationRenderer'
+import EditableCell from '../EditableCell'
 
-import styles from '@/pages/index/components/HostsGrid/index.less'
+import styles from './index.less'
 
 function HostsGrid({ size }) {
   const [searchText, setSearchText] = useState('')

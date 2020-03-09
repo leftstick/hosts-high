@@ -1,9 +1,9 @@
 import { useSize } from '@umijs/hooks'
 
-import HostsGrid from '@/pages/index/components/HostsGrid'
-import ControlPanel from '@/pages/index/components/ControlPanel'
+import HostsGrid from './components/HostsGrid'
+import ControlPanel from './components/ControlPanel'
 
-import styles from '@/pages/index/index.less'
+import styles from './index.less'
 
 export default () => {
   const [state, ref] = useSize(document.body)

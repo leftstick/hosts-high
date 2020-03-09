@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import { useModel } from 'umi'
 import { HOSTS } from '@/helpers/os'
 
-import styles from '@/pages/index/components/EditableStatus/index.less'
+import styles from './index.less'
 
 function EditableStatus() {
   const { acquired, permissionAcquired } = useModel('usePermissionModel')

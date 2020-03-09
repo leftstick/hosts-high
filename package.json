@@ -40,20 +40,12 @@
     "@commitlint/config-conventional": "^8.3.4",
     "babel-eslint": "^10.1.0",
     "concurrently": "^5.1.0",
-    "electron": "^8.0.3",
+    "electron": "^8.1.0",
     "electron-builder": "^22.4.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-config-umi": "^1.6.0",
-    "eslint-plugin-flowtype": "^4.6.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^2.5.0",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "react-coding-style": "^1.0.0"
   },
   "dependencies": {
     "@umijs/hooks": "^1.7.0",

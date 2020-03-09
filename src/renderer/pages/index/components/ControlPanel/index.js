@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 
-import EditableStatus from '@/pages/index/components/EditableStatus'
-import CreateHost from '@/pages/index/components/CreateHost'
+import EditableStatus from '../EditableStatus'
+import CreateHost from '../CreateHost'
 
-import styles from '@/pages/index/components/ControlPanel/index.less'
+import styles from './index.less'
 
 function ControlPanel({ size }) {
   return (

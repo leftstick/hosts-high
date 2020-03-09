@@ -7,7 +7,7 @@ import { useClickAway } from '@umijs/hooks'
 
 import { isIp, isDomains } from '@/helpers/object'
 
-import styles from '@/pages/index/components/EditableCell/index.less'
+import styles from './index.less'
 
 function EditableCell({ record, property }) {
   const [editing, setEditing] = useState(false)

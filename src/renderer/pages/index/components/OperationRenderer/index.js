@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { useModel } from 'umi'
 
-import styles from '@/pages/index/components/OperationRenderer/index.less'
+import styles from './index.less'
 
 function OperationRenderer({ data }) {
   const { acquired } = useModel('usePermissionModel')
