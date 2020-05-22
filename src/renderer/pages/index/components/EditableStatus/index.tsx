@@ -1,10 +1,10 @@
+import React from 'react'
 import { Tooltip } from 'antd'
 import { UnlockOutlined, LockOutlined } from '@ant-design/icons'
-import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { useModel } from 'umi'
-import { HOSTS } from '@/helpers/os'
+import { HOSTS } from '@/helpers'
 
 import styles from './index.less'
 
@@ -24,10 +24,6 @@ function EditableStatus() {
       <LockOutlined className={classnames(styles.lockBasis, styles.clickable)} onClick={permissionAcquired} />
     </Tooltip>
   )
-}
-
-EditableStatus.propTypes = {
-  size: PropTypes.object
 }
 
 export default EditableStatus

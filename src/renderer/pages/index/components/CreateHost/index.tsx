@@ -1,13 +1,13 @@
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Button, Drawer, Form, Input, Tooltip } from 'antd'
-import PropTypes from 'prop-types'
-
-import { isIp, isDomains } from '@/helpers/object'
 import { useModel } from 'umi'
+
+import { isIp, isDomains } from '@/helpers'
+import { IHost } from '@/IType'
 
 function CreateHost() {
   const [form] = Form.useForm()
-  const inputEl = useRef(null)
+  const inputEl = useRef<Input>(null)
   const [drawerVisable, setDrawerVisable] = useState(false)
   const { acquired } = useModel('usePermissionModel')
   const { createHost } = useModel('useHostsModel')
@@ -20,13 +20,13 @@ function CreateHost() {
     )
   }
 
-  function saveHost(values) {
+  function saveHost(values: { [name: string]: any }) {
     const vals = values.host.split('/')
-    const host = {
+    const host: IHost = {
       ip: vals[0],
       domain: vals[1],
       alias: vals[2] && vals[2].trim(),
-      disabled: false
+      disabled: false,
     }
     createHost(host).then(() => {
       form.resetFields()
@@ -53,17 +53,17 @@ function CreateHost() {
         onClose={() => {
           setDrawerVisable(false)
         }}
-        afterVisibleChange={vis => {
-          vis && inputEl.current.focus()
+        afterVisibleChange={(vis) => {
+          vis && inputEl.current!.focus()
         }}
       >
-        <Form onFinish={saveHost}>
+        <Form onFinish={saveHost} form={form}>
           <Form.Item
             name="host"
             rules={[
               {
                 required: true,
-                message: 'Please input your host!'
+                message: 'Please input your host!',
               },
               {
                 validator(rule, value) {
@@ -87,8 +87,8 @@ function CreateHost() {
                     return Promise.reject('alias cannot be longer than 15 characters')
                   }
                   return Promise.resolve()
-                }
-              }
+                },
+              },
             ]}
             extra={
               <>
@@ -104,10 +104,6 @@ function CreateHost() {
       </Drawer>
     </>
   )
-}
-
-CreateHost.propTypes = {
-  form: PropTypes.object
 }
 
 export default CreateHost

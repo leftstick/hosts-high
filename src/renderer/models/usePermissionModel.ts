@@ -1,18 +1,20 @@
 import { useEffect, useCallback } from 'react'
-import { R_OK, W_OK, access } from 'fs'
+import { constants, access } from 'fs'
 import sudo from 'sudo-prompt'
 import { useLocalStorageState } from '@umijs/hooks'
 
-import { HOSTS, PERMISSION_CMD } from '@/helpers/os'
+import { HOSTS, PERMISSION_CMD } from '@/helpers'
 
 const ALIAS_PREFIX = 'hosts_alias'
+
+const { R_OK, W_OK } = constants
 
 function usePermissionModel() {
   const [acquired, setAcquired] = useLocalStorageState(`${ALIAS_PREFIX}_permission_acquired`, false)
 
   const checkAcquired = useCallback(() => {
-    return new Promise(function(resolve, reject) {
-      access(HOSTS, R_OK | W_OK, err => {
+    return new Promise(function (resolve, reject) {
+      access(HOSTS, R_OK | W_OK, (err) => {
         setAcquired(!err)
         return resolve(!err)
       })
@@ -23,8 +25,8 @@ function usePermissionModel() {
     checkAcquired()
   }, [checkAcquired])
 
-  function permissionAcquired() {
-    return checkAcquired().then(hasPermission => {
+  const permissionAcquired = useCallback(() => {
+    return checkAcquired().then((hasPermission) => {
       if (hasPermission) {
         return
       }
@@ -39,11 +41,11 @@ function usePermissionModel() {
         }
       )
     })
-  }
+  }, [checkAcquired, setAcquired])
 
   return {
     acquired,
-    permissionAcquired
+    permissionAcquired,
   }
 }
 
@@ -51,10 +53,10 @@ export default usePermissionModel
 
 function requestPermission() {
   const options = {
-    name: 'Hosts Master'
+    name: 'Hosts Master',
   }
-  return new Promise(function(resolve, reject) {
-    sudo.exec(PERMISSION_CMD, options, function(err) {
+  return new Promise(function (resolve, reject) {
+    sudo.exec(PERMISSION_CMD, options, function (err) {
       if (err) {
         return reject(err)
       }

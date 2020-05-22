@@ -1,15 +1,15 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Input, Form } from 'antd'
-import PropTypes from 'prop-types'
 
 import { useModel } from 'umi'
 import { useClickAway } from '@umijs/hooks'
 
-import { isIp, isDomains } from '@/helpers/object'
+import { isIp, isDomains } from '@/helpers'
+import { IHost } from '@/IType'
 
 import styles from './index.less'
 
-function EditableCell({ record, property }) {
+function EditableCell({ record, property }: { record: IHost; property: keyof IHost }) {
   const [editing, setEditing] = useState(false)
   const { acquired } = useModel('usePermissionModel')
   const { modifyHost } = useModel('useHostsModel')
@@ -35,11 +35,11 @@ function EditableCell({ record, property }) {
       <EditArea
         record={record}
         property={property}
-        onChange={val => {
+        onChange={(val) => {
           setEditing(false)
           modifyHost(record, {
             ...record,
-            [property]: val
+            [property]: val,
           })
         }}
       />
@@ -47,24 +47,25 @@ function EditableCell({ record, property }) {
   )
 }
 
-EditableCell.propTypes = {
-  record: PropTypes.object,
-  property: PropTypes.string
-}
-
 export default EditableCell
 
-function EditArea({ property, record, onChange }) {
-  function modify(values) {
-    onChange && onChange(values.host)
-  }
-
+function EditArea({
+  property,
+  record,
+  onChange,
+}: {
+  property: keyof IHost
+  record: IHost
+  onChange: (val: string) => void
+}) {
   return (
     <Form
       className={styles.editArea}
-      onFinish={modify}
+      onFinish={(values) => {
+        onChange && onChange(values.host)
+      }}
       initialValues={{
-        host: record[property]
+        host: record[property],
       }}
     >
       <Form.Item
@@ -85,19 +86,12 @@ function EditArea({ property, record, onChange }) {
                 return Promise.reject('alias cannot be longer than 15 characters')
               }
               return Promise.resolve()
-            }
-          }
+            },
+          },
         ]}
       >
         <Input autoFocus style={{ height: '26px' }} />
       </Form.Item>
     </Form>
   )
-}
-
-EditArea.propTypes = {
-  form: PropTypes.object,
-  record: PropTypes.object,
-  property: PropTypes.string,
-  onChange: PropTypes.func
 }

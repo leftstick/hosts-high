@@ -38,22 +38,23 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "babel-eslint": "^10.1.0",
-    "concurrently": "^5.1.0",
-    "electron": "^8.1.0",
-    "electron-builder": "^22.4.0",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.8",
-    "prettier": "^1.19.1",
-    "react-coding-style": "^1.0.0"
+    "@types/classnames": "^2.2.10",
+    "@types/hostile": "^1.3.0",
+    "@types/node": "^14.0.5",
+    "concurrently": "^5.2.0",
+    "electron": "^9.0.0",
+    "electron-builder": "^22.6.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.5",
+    "react-coding-style": "^1.1.0"
   },
   "dependencies": {
-    "@umijs/hooks": "^1.7.0",
-    "@umijs/plugin-antd": "^0.3.0",
-    "@umijs/plugin-model": "^2.1.1",
+    "@umijs/hooks": "^1.9.2",
+    "@umijs/plugin-antd": "^0.5.1",
+    "@umijs/plugin-model": "^2.3.1",
     "classnames": "^2.2.6",
     "hostile": "^1.3.2",
-    "sudo-prompt": "^9.1.1",
-    "umi": "^3.0.3"
+    "sudo-prompt": "^9.2.1",
+    "umi": "^3.2.2"
   }
 }

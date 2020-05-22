@@ -1,19 +1,19 @@
-import { useState, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Input, Table } from 'antd'
-import PropTypes from 'prop-types'
 
 import { useModel } from 'umi'
 
 import OperationRenderer from '../OperationRenderer'
 import EditableCell from '../EditableCell'
+import { ISize } from '@/IType'
 
 import styles from './index.less'
 
-function HostsGrid({ size }) {
+function HostsGrid({ size }: { size: ISize }) {
   const [searchText, setSearchText] = useState('')
   const { hosts } = useModel('useHostsModel')
   const displayHosts = useMemo(() => {
-    return hosts.filter(h => {
+    return hosts.filter((h) => {
       if (!searchText) {
         return true
       }
@@ -35,33 +35,33 @@ function HostsGrid({ size }) {
       title: 'Ip',
       dataIndex: 'ip',
       width: 200,
-      render: (text, record) => <EditableCell record={record} property="ip" />
+      render: (text, record) => <EditableCell record={record} property="ip" />,
     },
     {
       title: 'Domain',
       dataIndex: 'domain',
       width: 400,
-      render: (text, record) => <EditableCell record={record} property="domain" />
+      render: (text, record) => <EditableCell record={record} property="domain" />,
     },
     {
       title: 'Alias',
       dataIndex: 'alias',
-      render: (text, record) => <EditableCell record={record} property="alias" />
+      render: (text, record) => <EditableCell record={record} property="alias" />,
     },
     {
       title: 'Operation',
       width: 150,
-      render: (text, record) => <OperationRenderer data={record} />
-    }
+      render: (text, record) => <OperationRenderer data={record} />,
+    },
   ]
 
   return (
-    <div className={styles.grid} style={{ width: `${size.width}px`, height: `${size.height}px` }}>
+    <div className={styles.grid} style={{ width: size.width, height: size.height }}>
       <Input
         autoFocus
         placeholder="Type anything to filter..."
         className={styles.searchInput}
-        onChange={e => setSearchText(e.target.value)}
+        onChange={(e) => setSearchText(e.target.value)}
       />
       <div
         className="ag-theme-balham"
@@ -74,16 +74,12 @@ function HostsGrid({ size }) {
           className={styles.dataContainer}
           columns={columnDefs}
           dataSource={displayHosts}
-          rowKey={host => host.ip + host.domain}
+          rowKey={(host) => host.ip + host.domain}
           size="small"
         />
       </div>
     </div>
   )
-}
-
-HostsGrid.propTypes = {
-  size: PropTypes.object
 }
 
 export default HostsGrid

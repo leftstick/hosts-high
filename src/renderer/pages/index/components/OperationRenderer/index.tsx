@@ -1,11 +1,13 @@
+import React from 'react'
 import { Button } from 'antd'
-import PropTypes from 'prop-types'
 
 import { useModel } from 'umi'
 
+import { IHost } from '@/IType'
+
 import styles from './index.less'
 
-function OperationRenderer({ data }) {
+function OperationRenderer({ data }: { data: IHost }) {
   const { acquired } = useModel('usePermissionModel')
   const { toggleHostState, removeHost } = useModel('useHostsModel')
 
@@ -39,12 +41,6 @@ function OperationRenderer({ data }) {
       </Button>
     </div>
   )
-}
-
-OperationRenderer.propTypes = {
-  data: PropTypes.shape({
-    disabled: PropTypes.bool
-  })
 }
 
 export default OperationRenderer

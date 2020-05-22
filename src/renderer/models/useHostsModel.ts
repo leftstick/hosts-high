@@ -1,10 +1,11 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import { useLocalStorageState } from '@umijs/hooks'
 import hostile from 'hostile'
+import { IHost, IAlias } from '@/IType'
 
 const ALIAS_PREFIX = 'hosts_alias'
 
-function getFromStorage(key, defaultValue) {
+function getFromStorage<T>(key: string, defaultValue: T): T {
   if (!key) {
     return defaultValue
   }
@@ -19,21 +20,21 @@ const DISABLED_HOSTS_KEY = `${ALIAS_PREFIX}_disabledHosts`
 const ALIAS_KEY = `${ALIAS_PREFIX}_aliases`
 
 function useHostsModel() {
-  const [sysHosts, setSysHosts] = useState([])
-  const [disabledHosts, setDisabledHosts] = useLocalStorageState(DISABLED_HOSTS_KEY, [])
-  const [aliases, setAliases] = useLocalStorageState(ALIAS_KEY, {})
+  const [sysHosts, setSysHosts] = useState<IHost[]>([])
+  const [disabledHosts, setDisabledHosts] = useLocalStorageState<IHost[]>(DISABLED_HOSTS_KEY, [])
+  const [aliases, setAliases] = useLocalStorageState<IAlias>(ALIAS_KEY, {})
 
   const hosts = useMemo(() => sortWithDisabledHosts(sysHosts, disabledHosts), [sysHosts, disabledHosts])
 
   const addDisabledHost = useCallback(
-    host => {
+    (host: IHost) => {
       return new Promise((resolve, reject) => {
-        const disabledHosts = getFromStorage(DISABLED_HOSTS_KEY, [])
-        const isDefined = disabledHosts.some(h => h.ip === host.ip && h.domain === host.domain)
+        const disabledHosts = getFromStorage<IHost[]>(DISABLED_HOSTS_KEY, [])
+        const isDefined = disabledHosts.some((h) => h.ip === host.ip && h.domain === host.domain)
         if (isDefined) {
           return reject(`host [${host.ip} ${host.domain}] has been used`)
         }
-        setDisabledHosts(disabledHosts => [...disabledHosts, { ...host, disabled: true }])
+        setDisabledHosts((disabledHosts) => [...disabledHosts!, { ...host, disabled: true }])
         return resolve()
       })
     },
@@ -41,20 +42,23 @@ function useHostsModel() {
   )
 
   const addSysHost = useCallback(
-    host => {
+    (host: IHost) => {
       return new Promise((resolve, reject) => {
         hostile.get(false, (err, lines) => {
-          const isDefined = lines.some(line => line[0] === host.ip && line[1] === host.domain)
+          const isDefined = lines.some((line) => line[0] === host.ip && line[1] === host.domain)
           if (isDefined) {
             return reject(`host [${host.ip} ${host.domain}] has been used`)
           }
 
-          hostile.set(host.ip, host.domain, err => {
+          hostile.set(host.ip, host.domain, (err) => {
             if (err) {
               return reject(`Failed to add [${host.ip} ${host.domain}]: ${err.message}`)
             }
             setAliases({ ...aliases, [host.ip + host.domain]: host.alias })
-            setSysHosts(sysHosts => [...sysHosts, { ...host, disabled: false, alias: aliases[host.ip + host.domain] }])
+            setSysHosts((sysHosts) => [
+              ...sysHosts,
+              { ...host, disabled: false, alias: aliases[host.ip + host.domain] },
+            ])
             resolve()
           })
         })
@@ -64,7 +68,7 @@ function useHostsModel() {
   )
 
   const createHost = useCallback(
-    host => {
+    (host: IHost) => {
       if (host.disabled) {
         return addDisabledHost(host)
       }
@@ -74,9 +78,11 @@ function useHostsModel() {
   )
 
   const deleteDisabledHost = useCallback(
-    host => {
-      return new Promise(resolve => {
-        setDisabledHosts(disabledHosts => disabledHosts.filter(h => !(h.ip === host.ip && h.domain === host.domain)))
+    (host: IHost) => {
+      return new Promise((resolve) => {
+        setDisabledHosts((disabledHosts) =>
+          disabledHosts!.filter((h) => !(h.ip === host.ip && h.domain === host.domain))
+        )
         return resolve()
       })
     },
@@ -84,13 +90,13 @@ function useHostsModel() {
   )
 
   const deleteSysHost = useCallback(
-    host => {
+    (host: IHost) => {
       return new Promise((resolve, reject) => {
-        hostile.remove(host.ip, host.domain, err => {
+        hostile.remove(host.ip, host.domain, (err) => {
           if (err) {
             return reject(`Failed to delete [${host.ip} ${host.domain}]: ${err.message}`)
           }
-          setSysHosts(sysHosts => sysHosts.filter(h => !(h.ip === host.ip && h.domain === host.domain)))
+          setSysHosts((sysHosts) => sysHosts.filter((h) => !(h.ip === host.ip && h.domain === host.domain)))
           resolve()
         })
       })
@@ -99,7 +105,7 @@ function useHostsModel() {
   )
 
   const removeHost = useCallback(
-    host => {
+    (host: IHost) => {
       if (host.disabled) {
         return deleteDisabledHost(host)
       }
@@ -109,14 +115,14 @@ function useHostsModel() {
   )
 
   const modifyHost = useCallback(
-    (oldHost, newHost) => {
+    (oldHost: IHost, newHost: IHost) => {
       return new Promise((resolve, reject) => {
         if (newHost.ip === oldHost.ip && newHost.domain === oldHost.domain && newHost.alias === oldHost.alias) {
           return resolve()
         }
 
         if (newHost.ip !== oldHost.ip || newHost.domain !== oldHost.domain) {
-          const foundExist = hosts.find(h => h.ip === newHost.ip && h.domain === newHost.domain)
+          const foundExist = hosts.find((h) => h.ip === newHost.ip && h.domain === newHost.domain)
           if (foundExist) {
             return reject('ip/domain/alias might be used by other host')
           }
@@ -124,7 +130,7 @@ function useHostsModel() {
 
         if (newHost.disabled) {
           setDisabledHosts(
-            disabledHosts.map(h => {
+            disabledHosts.map((h) => {
               if (h.ip === oldHost.ip && h.domain === oldHost.domain) {
                 return newHost
               }
@@ -135,7 +141,7 @@ function useHostsModel() {
         }
 
         deleteSysHost(oldHost)
-          .then(realSysHosts => addSysHost(newHost))
+          .then((realSysHosts) => addSysHost(newHost))
           .then(resolve, reject)
       })
     },
@@ -143,7 +149,7 @@ function useHostsModel() {
   )
 
   const toggleHostState = useCallback(
-    host => {
+    (host: IHost) => {
       const newHost = { ...host, disabled: !host.disabled }
       return new Promise((resolve, reject) => {
         if (host.disabled) {
@@ -160,7 +166,7 @@ function useHostsModel() {
   )
 
   useEffect(() => {
-    getSysHosts(aliases).then(sysHosts => {
+    getSysHosts(aliases).then((sysHosts) => {
       setSysHosts(sysHosts)
     })
   }, [aliases])
@@ -170,26 +176,26 @@ function useHostsModel() {
     createHost,
     toggleHostState,
     removeHost,
-    modifyHost
+    modifyHost,
   }
 }
 
 export default useHostsModel
 
-function getSysHosts(aliases) {
-  return new Promise(function(resolve, reject) {
-    hostile.get(false, function(error, lines) {
+function getSysHosts(aliases: IAlias): Promise<IHost[]> {
+  return new Promise(function (resolve, reject) {
+    hostile.get(false, function (error, lines) {
       if (error) {
         return reject(error.message)
       }
-      const sysHosts = lines.map(line => {
+      const sysHosts = lines.map((line) => {
         const ip = line[0]
         const domain = line[1]
         return {
           ip: ip,
           domain: domain,
           disabled: false,
-          alias: aliases[ip + domain] || ''
+          alias: aliases[ip + domain] || '',
         }
       })
 
@@ -198,13 +204,13 @@ function getSysHosts(aliases) {
   })
 }
 
-function sortWithDisabledHosts(sysHosts, disabledHosts) {
+function sortWithDisabledHosts(sysHosts: IHost[], disabledHosts: IHost[]) {
   const hosts = [...sysHosts, ...disabledHosts]
   hosts.sort((a, b) => {
-    const aip = a.ip.split('.')
-    const bip = b.ip.split('.')
+    const aip = a.ip.split('.').map((i) => parseInt(i))
+    const bip = b.ip.split('.').map((i) => parseInt(i))
     for (let i = 0; i < aip.length; i++) {
-      if ((aip[i] = parseInt(aip[i])) < (b[i] = parseInt(bip[i]))) {
+      if (aip[i] < bip[i]) {
         return -1
       } else if (aip[i] > bip[i]) {
         return 1

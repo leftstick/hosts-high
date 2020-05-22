@@ -5,7 +5,7 @@ export default defineConfig({
   outputPath: '../../output',
   publicPath: './',
   history: {
-    type: 'hash'
+    type: 'hash',
   },
   chainWebpack(config, { webpack }) {
     config
@@ -13,9 +13,8 @@ export default defineConfig({
       .plugin('DefinePlugin')
       .use(webpack['DefinePlugin'], [
         {
-          $dirname: '__dirname'
-        }
+          $dirname: '__dirname',
+        },
       ])
-  }
-  // plugins: ['@umijs/plugin-model', '@umijs/plugin-antd']
+  },
 })
