@@ -7,6 +7,7 @@ export default defineConfig({
   history: {
     type: 'hash',
   },
+  title: 'Hosts Master',
   chainWebpack(config, { webpack }) {
     config
       .target('electron-renderer')

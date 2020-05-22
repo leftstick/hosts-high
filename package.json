@@ -1,11 +1,11 @@
 {
   "name": "hosts",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "Manage hosts easily",
   "main": "src/main/index.js",
   "scripts": {
     "start": "concurrently \"NODE_ENV=dev electron .\" \"APP_ROOT=src/renderer umi dev\"",
-    "build": "APP_ROOT=src/renderer umi build && electron-builder --mac"
+    "build": "rm -rf dist && APP_ROOT=src/renderer umi build && electron-builder --mac"
   },
   "build": {
     "productName": "Hosts Master",

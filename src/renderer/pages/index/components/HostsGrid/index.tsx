@@ -3,9 +3,9 @@ import { Input, Table } from 'antd'
 
 import { useModel } from 'umi'
 
+import { ISize, IHost } from '@/IType'
 import OperationRenderer from '../OperationRenderer'
 import EditableCell from '../EditableCell'
-import { ISize } from '@/IType'
 
 import styles from './index.less'
 
@@ -35,23 +35,23 @@ function HostsGrid({ size }: { size: ISize }) {
       title: 'Ip',
       dataIndex: 'ip',
       width: 200,
-      render: (text, record) => <EditableCell record={record} property="ip" />,
+      render: (text: string, record: IHost) => <EditableCell record={record} property="ip" />,
     },
     {
       title: 'Domain',
       dataIndex: 'domain',
       width: 400,
-      render: (text, record) => <EditableCell record={record} property="domain" />,
+      render: (text: string, record: IHost) => <EditableCell record={record} property="domain" />,
     },
     {
       title: 'Alias',
       dataIndex: 'alias',
-      render: (text, record) => <EditableCell record={record} property="alias" />,
+      render: (text: string, record: IHost) => <EditableCell record={record} property="alias" />,
     },
     {
       title: 'Operation',
       width: 150,
-      render: (text, record) => <OperationRenderer data={record} />,
+      render: (text: string, record: IHost) => <OperationRenderer data={record} />,
     },
   ]
 
@@ -65,7 +65,7 @@ function HostsGrid({ size }: { size: ISize }) {
       />
       <div
         className="ag-theme-balham"
-        style={{ width: `${size.width}px`, height: `${size.height - 32}px`, maxHeight: `${size.height - 32}px` }}
+        style={{ width: size.width, height: size.height - 32, maxHeight: size.height - 32 }}
       >
         <Table
           bordered
