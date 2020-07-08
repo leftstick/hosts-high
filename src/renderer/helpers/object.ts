@@ -16,5 +16,5 @@ export function isDomains(domains: string) {
   const reg = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/
   const vals = domains.split(' ').map((val) => val.trim())
 
-  return vals.every((val) => reg.test(val))
+  return vals.every((val) => reg.test(val) || val === 'localhost')
 }
