@@ -33,7 +33,7 @@
     ]
   },
   "lint-staged": {
-    "*.js": "eslint --max-warnings=0"
+    "*.{j,t}s?(x)": "eslint --max-warnings=0"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",

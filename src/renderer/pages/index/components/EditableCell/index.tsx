@@ -13,6 +13,7 @@ function EditableCell({ record, property }: { record: IHost; property: keyof IHo
   const [editing, setEditing] = useState(false)
   const { acquired } = useModel('usePermissionModel')
   const { modifyHost } = useModel('useHostsModel')
+
   const ref = useClickAway(() => {
     setEditing(false)
   })
