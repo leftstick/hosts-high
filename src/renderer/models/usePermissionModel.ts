@@ -55,7 +55,7 @@ function requestPermission() {
   const options = {
     name: 'Hosts Master',
   }
-  return new Promise(function (resolve, reject) {
+  return new Promise<void>(function (resolve, reject) {
     sudo.exec(PERMISSION_CMD, options, function (err) {
       if (err) {
         return reject(err)

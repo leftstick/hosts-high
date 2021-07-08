@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button } from 'antd'
+import { Tooltip } from 'antd'
+import { DeleteOutlined, PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons'
 
 import { useModel } from 'umi'
 
@@ -13,32 +14,36 @@ function OperationRenderer({ data }: { data: IHost }) {
 
   return (
     <div className={styles.oper}>
-      {data.disabled && (
-        <Button
-          className={styles.enableBtn}
-          type="link"
-          size="small"
-          disabled={!acquired}
-          onClick={() => toggleHostState(data)}
-        >
-          Enable
-        </Button>
-      )}
-
       {!data.disabled && (
-        <Button
-          className={styles.disableBtn}
-          type="link"
-          size="small"
-          disabled={!acquired}
-          onClick={() => toggleHostState(data)}
+        <Tooltip
+          title="Click to disable this rule"
+          getPopupContainer={(e) => e.parentElement!}
+          overlayStyle={{ width: 170 }}
         >
-          Disable
-        </Button>
+          <PauseCircleOutlined className={styles.pauseBtn} disabled={!acquired} onClick={() => toggleHostState(data)} />
+        </Tooltip>
       )}
-      <Button className={styles.delBtn} type="link" size="small" disabled={!acquired} onClick={() => removeHost(data)}>
-        Delete
-      </Button>
+      {data.disabled && (
+        <Tooltip
+          title="Click to enable this rule"
+          getPopupContainer={(e) => e.parentElement!}
+          overlayStyle={{ width: 170 }}
+        >
+          <PlayCircleOutlined className={styles.enableBtn} disabled={!acquired} onClick={() => toggleHostState(data)} />
+        </Tooltip>
+      )}
+      <Tooltip
+        title="Click to delete this rule"
+        getPopupContainer={(e) => e.parentElement!}
+        overlayStyle={{ width: 165 }}
+      >
+        <DeleteOutlined
+          style={{ marginLeft: 15 }}
+          className={styles.delBtn}
+          disabled={!acquired}
+          onClick={() => removeHost(data)}
+        />
+      </Tooltip>
     </div>
   )
 }

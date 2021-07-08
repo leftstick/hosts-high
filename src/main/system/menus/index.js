@@ -1,6 +1,36 @@
 const { app, BrowserWindow } = require('electron')
 const { resolve } = require('path')
 
+/**
+ * @type {{[alias: string]: BrowserWindow }}
+ */
+ const linksMap = {
+  about: null,
+}
+
+function openMenu(alias, linkPath, size) {
+  if (linksMap[alias]) {
+    linksMap[alias].focus()
+    return
+  }
+  const link = new BrowserWindow({
+    parent: BrowserWindow.getFocusedWindow(),
+    width: size.width,
+    height: size.height,
+    center: true,
+    resizable: false,
+    minimizable: false,
+    maximizable: false,
+    show: true,
+    title: '',
+  })
+  link.loadURL('file://' + linkPath)
+  linksMap[alias] = link
+  link.on('closed', function () {
+    linksMap[alias] = null
+  })
+}
+
 module.exports = [
   {
     label: 'Application',
@@ -8,17 +38,7 @@ module.exports = [
       {
         label: 'About Hosts Master',
         click: function() {
-          new BrowserWindow({
-            parent: BrowserWindow.getFocusedWindow(),
-            width: 285,
-            height: 230,
-            center: true,
-            resizable: false,
-            minimizable: false,
-            maximizable: false,
-            show: true,
-            title: ''
-          }).loadURL('file://' + resolve(__dirname, 'about.html'))
+          openMenu('about', resolve(__dirname, 'about.html'), { width: 285, height: 230 })
         }
       },
       {

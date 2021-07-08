@@ -34,23 +34,23 @@ function HostsGrid({ size }: { size: ISize }) {
     {
       title: 'Ip',
       dataIndex: 'ip',
-      width: 200,
+      width: 160,
       render: (text: string, record: IHost) => <EditableCell record={record} property="ip" />,
     },
     {
       title: 'Domain',
       dataIndex: 'domain',
-      width: 400,
       render: (text: string, record: IHost) => <EditableCell record={record} property="domain" />,
     },
     {
       title: 'Alias',
       dataIndex: 'alias',
+      width: 120,
       render: (text: string, record: IHost) => <EditableCell record={record} property="alias" />,
     },
     {
-      title: 'Operation',
-      width: 150,
+      title: 'Action',
+      width: 90,
       render: (text: string, record: IHost) => <OperationRenderer data={record} />,
     },
   ]
@@ -69,7 +69,7 @@ function HostsGrid({ size }: { size: ISize }) {
       >
         <Table
           bordered
-          scroll={{ y: size.height - 32 - 38 }}
+          scroll={{ y: size.height - 80 }}
           pagination={false}
           className={styles.dataContainer}
           columns={columnDefs}

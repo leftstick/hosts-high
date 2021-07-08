@@ -98,7 +98,7 @@ function CreateHost() {
               </>
             }
           >
-            <Input ref={inputEl} placeholder="input your host" />
+            <Input ref={inputEl} placeholder="input your host, press enter to save" />
           </Form.Item>
         </Form>
       </Drawer>

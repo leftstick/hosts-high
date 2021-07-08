@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Input, Form } from 'antd'
 
 import { useModel } from 'umi'
-import { useClickAway } from '@umijs/hooks'
+import { useClickAway } from 'ahooks'
 
 import { isIp, isDomains } from '@/helpers'
 import { IHost } from '@/IType'
@@ -13,10 +13,11 @@ function EditableCell({ record, property }: { record: IHost; property: keyof IHo
   const [editing, setEditing] = useState(false)
   const { acquired } = useModel('usePermissionModel')
   const { modifyHost } = useModel('useHostsModel')
+  const ref = useRef<HTMLDivElement>(null)
 
-  const ref = useClickAway(() => {
+  useClickAway(() => {
     setEditing(false)
-  })
+  }, ref)
 
   if (!editing) {
     return (
