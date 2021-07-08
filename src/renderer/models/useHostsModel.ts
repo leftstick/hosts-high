@@ -28,7 +28,7 @@ function useHostsModel() {
 
   const addDisabledHost = useCallback(
     (host: IHost) => {
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
         const disabledHosts = getFromStorage<IHost[]>(DISABLED_HOSTS_KEY, [])
         const isDefined = disabledHosts.some((h) => h.ip === host.ip && h.domain === host.domain)
         if (isDefined) {
@@ -43,7 +43,7 @@ function useHostsModel() {
 
   const addSysHost = useCallback(
     (host: IHost) => {
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
         hostile.get(false, (err, lines) => {
           const isDefined = lines.some((line) => line[0] === host.ip && line[1] === host.domain)
           if (isDefined) {
@@ -79,7 +79,7 @@ function useHostsModel() {
 
   const deleteDisabledHost = useCallback(
     (host: IHost) => {
-      return new Promise((resolve) => {
+      return new Promise<void>((resolve) => {
         setDisabledHosts((disabledHosts) =>
           disabledHosts!.filter((h) => !(h.ip === host.ip && h.domain === host.domain))
         )
@@ -91,7 +91,7 @@ function useHostsModel() {
 
   const deleteSysHost = useCallback(
     (host: IHost) => {
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
         hostile.remove(host.ip, host.domain, (err) => {
           if (err) {
             return reject(`Failed to delete [${host.ip} ${host.domain}]: ${err.message}`)
@@ -116,7 +116,7 @@ function useHostsModel() {
 
   const modifyHost = useCallback(
     (oldHost: IHost, newHost: IHost) => {
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
         if (newHost.ip === oldHost.ip && newHost.domain === oldHost.domain && newHost.alias === oldHost.alias) {
           return resolve()
         }
@@ -209,6 +209,10 @@ function sortWithDisabledHosts(sysHosts: IHost[], disabledHosts: IHost[]) {
   hosts.sort((a, b) => {
     const aip = a.ip.split('.').map((i) => parseInt(i))
     const bip = b.ip.split('.').map((i) => parseInt(i))
+    if (a.ip === b.ip) {
+      return a.domain.localeCompare(b.domain)
+    }
+
     for (let i = 0; i < aip.length; i++) {
       if (aip[i] < bip[i]) {
         return -1

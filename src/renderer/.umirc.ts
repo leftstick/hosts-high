@@ -8,6 +8,10 @@ export default defineConfig({
     type: 'hash',
   },
   title: 'Hosts Master',
+  antd: {},
+  // dynamicImport: {},
+  // mfsu: {},
+  // webpack5: {},
   chainWebpack(config, { webpack }) {
     config
       .target('electron-renderer')
