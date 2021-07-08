@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSize } from '@umijs/hooks'
+import { useSize } from 'ahooks'
 
 import HostsGrid from './components/HostsGrid'
 import ControlPanel from './components/ControlPanel'
@@ -7,8 +7,8 @@ import ControlPanel from './components/ControlPanel'
 import styles from './index.less'
 
 export default () => {
-  const [state] = useSize(document.body)
-  const { width, height } = state
+  const { width, height } = useSize(document.body)
+
   return (
     <div className={styles.container} style={{ width, height }}>
       <HostsGrid size={{ width: width! - 40, height: height! - 75 }} />

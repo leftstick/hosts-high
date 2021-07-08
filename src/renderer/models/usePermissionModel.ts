@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react'
 import { constants, access } from 'fs'
 import sudo from 'sudo-prompt'
-import { useLocalStorageState } from '@umijs/hooks'
+import { useLocalStorageState } from 'ahooks'
 
 import { HOSTS, PERMISSION_CMD } from '@/helpers'
 

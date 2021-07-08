@@ -789,17 +789,6 @@
     jest-worker "24.9.0"
     prettier "2.2.1"
 
-"@umijs/hooks@^1.9.3":
-  version "1.9.3"
-  resolved "https://registry.npm.taobao.org/@umijs/hooks/download/@umijs/hooks-1.9.3.tgz#cc0de9e832714e03c1338aba17969aed2d29afd7"
-  integrity sha1-zA3p6DJxTgPBM4q6F5aa7S0pr9c=
-  dependencies:
-    "@umijs/use-request" "^1.4.3"
-    intersection-observer "^0.7.0"
-    lodash.isequal "^4.5.0"
-    resize-observer-polyfill "^1.5.1"
-    screenfull "^5.0.0"
-
 "@umijs/plugin-antd@^0.10.0":
   version "0.10.0"
   resolved "https://registry.nlark.com/@umijs/plugin-antd/download/@umijs/plugin-antd-0.10.0.tgz?cache=0&sync_timestamp=1623042031477&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40umijs%2Fplugin-antd%2Fdownload%2F%40umijs%2Fplugin-antd-0.10.0.tgz#affc422825771150750d2aca042c26dbff11b8de"
@@ -897,15 +886,6 @@
     "@umijs/server" "3.5.5"
     "@umijs/utils" "3.5.5"
     webpack-chain "6.5.1"
-
-"@umijs/use-request@^1.4.3":
-  version "1.4.3"
-  resolved "https://registry.nlark.com/@umijs/use-request/download/@umijs/use-request-1.4.3.tgz#bc5fadc4cb07d796eb35f09838d6a15cb12802f7"
-  integrity sha1-vF+txMsH15brNfCYONahXLEoAvc=
-  dependencies:
-    lodash.debounce "^4.0.8"
-    lodash.throttle "^4.1.1"
-    umi-request "^1.2.17"
 
 "@umijs/utils@3.5.5":
   version "3.5.5"
@@ -1829,7 +1809,7 @@ commander@^7.2.0:
 
 compare-func@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.npm.taobao.org/compare-func/download/compare-func-2.0.0.tgz#fb65e75edbddfd2e568554e8b5b05fff7a51fcb3"
+  resolved "https://registry.nlark.com/compare-func/download/compare-func-2.0.0.tgz#fb65e75edbddfd2e568554e8b5b05fff7a51fcb3"
   integrity sha1-+2XnXtvd/S5WhVTotbBf/3pR/LM=
   dependencies:
     array-ify "^1.0.0"
@@ -3579,12 +3559,12 @@ is-regexp@^1.0.0:
 
 is-stream@^1.0.1, is-stream@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.npm.taobao.org/is-stream/download/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
+  resolved "https://registry.nlark.com/is-stream/download/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
   integrity sha1-EtSj3U5o4Lec6428hBc66A2RykQ=
 
 is-stream@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.npm.taobao.org/is-stream/download/is-stream-2.0.0.tgz#bde9c32680d6fae04129d6ac9d921ce7815f78e3"
+  resolved "https://registry.nlark.com/is-stream/download/is-stream-2.0.0.tgz#bde9c32680d6fae04129d6ac9d921ce7815f78e3"
   integrity sha1-venDJoDW+uBBKdasnZIc54FfeOM=
 
 is-string@^1.0.5, is-string@^1.0.6:
@@ -3648,7 +3628,7 @@ isexe@^2.0.0:
   resolved "https://registry.npm.taobao.org/isexe/download/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
-isomorphic-fetch@^2.1.1, isomorphic-fetch@^2.2.1:
+isomorphic-fetch@^2.1.1:
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/isomorphic-fetch/download/isomorphic-fetch-2.2.1.tgz#611ae1acf14f5e81f729507472819fe9733558a9"
   integrity sha1-YRrhrPFPXoH3KVB0coGf6XM1WKk=
@@ -4649,7 +4629,7 @@ postcss-color-functional-notation@^2.0.1:
 
 postcss-color-gray@^5.0.0:
   version "5.0.0"
-  resolved "https://registry.npm.taobao.org/postcss-color-gray/download/postcss-color-gray-5.0.0.tgz#532a31eb909f8da898ceffe296fdc1f864be8547"
+  resolved "https://registry.nlark.com/postcss-color-gray/download/postcss-color-gray-5.0.0.tgz#532a31eb909f8da898ceffe296fdc1f864be8547"
   integrity sha1-Uyox65CfjaiYzv/ilv3B+GS+hUc=
   dependencies:
     "@csstools/convert-colors" "^1.4.0"
@@ -5085,13 +5065,6 @@ q@^1.5.1:
   version "1.5.1"
   resolved "https://registry.nlark.com/q/download/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
-
-qs@^6.9.1:
-  version "6.10.1"
-  resolved "https://registry.npm.taobao.org/qs/download/qs-6.10.1.tgz?cache=0&sync_timestamp=1616385371256&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fqs%2Fdownload%2Fqs-6.10.1.tgz#4931482fa8d647a5aab799c5271d2133b981fb6a"
-  integrity sha1-STFIL6jWR6Wqt5nFJx0hM7mB+2o=
-  dependencies:
-    side-channel "^1.0.4"
 
 query-string@^4.1.0:
   version "4.3.4"
@@ -6847,14 +6820,6 @@ ua-parser-js@^0.7.18:
   version "0.7.28"
   resolved "https://registry.nlark.com/ua-parser-js/download/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
   integrity sha1-i6BOZT81ziECOcZGYWhb+RId7DE=
-
-umi-request@^1.2.17:
-  version "1.3.9"
-  resolved "https://registry.nlark.com/umi-request/download/umi-request-1.3.9.tgz?cache=0&sync_timestamp=1622000725622&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fumi-request%2Fdownload%2Fumi-request-1.3.9.tgz#e745edc22e1eb83e9e8d02334a6d1ebae20b025e"
-  integrity sha1-50Xtwi4euD6ejQIzSm0euuILAl4=
-  dependencies:
-    isomorphic-fetch "^2.2.1"
-    qs "^6.9.1"
 
 umi@^3.5.5:
   version "3.5.5"
