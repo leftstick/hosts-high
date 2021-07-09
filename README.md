@@ -28,5 +28,5 @@ npm start
 
 ## LICENSE
 
-[mit license]: (https://raw.githubusercontent.com/leftstick/hosts-high/master/LICENSE)
+[mit license]: https://raw.githubusercontent.com/leftstick/hosts-high/master/LICENSE
 [david-url]: https://david-dm.org/leftstick/hosts-high.png
