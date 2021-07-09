@@ -6,6 +6,9 @@ const app = electron.app
 const Menu = electron.Menu
 const BrowserWindow = electron.BrowserWindow
 
+/**
+ * @type {electron.BrowserWindow}
+ */
 let mainWindow = null
 
 app.on('window-all-closed', app.quit)
