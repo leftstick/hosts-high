@@ -13,7 +13,7 @@ export default defineConfig({
   request: false,
   outputPath: 'output',
   layout: false,
-  title: 'Hosts High',
+  title: 'Hosts Master',
   mfsu: {},
   routes: [
     {
