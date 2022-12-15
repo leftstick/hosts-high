@@ -1,55 +1,54 @@
 {
-  "name": "hosts",
-  "version": "3.1.2",
-  "description": "Manage hosts easily",
-  "main": "src/main/index.js",
+  "name": "hosts-master",
+  "version": "4.0.0",
+  "private": false,
+  "license": "MIT",
+  "author": "Howard Zuo <leftstick@qq.com>",
+  "main": "main/index.js",
   "scripts": {
-    "start": "concurrently \"NODE_ENV=dev electron .\" \"APP_ROOT=src/renderer umi dev\"",
-    "build": "rm -rf dist && APP_ROOT=src/renderer umi build && electron-builder --mac",
-    "prepare": "husky install"
+    "build": "rm -rf dist && max build && electron-builder --mac",
+    "dev": "concurrently \"NODE_ENV=dev electron .\" \"max dev\"",
+    "postinstall": "max setup && node postInstallScript.js",
+    "prepare": "husky install",
+    "setup": "max setup"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.8.0",
+    "@umijs/max": "^4.0.36",
+    "ahooks": "^3.7.2",
+    "antd": "^5.0.7",
+    "classnames": "^2.3.2",
+    "hostile": "^1.3.3",
+    "sudo-prompt": "^9.2.1"
+  },
+  "devDependencies": {
+    "@types/hostile": "^1.3.0",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "concurrently": "^7.6.0",
+    "electron": "^22.0.0",
+    "electron-builder": "^23.6.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1",
+    "prettier-plugin-organize-imports": "^3",
+    "prettier-plugin-packagejson": "^2",
+    "replace-in-file": "^6.3.5",
+    "typescript": "^4.9.4"
   },
   "build": {
-    "productName": "Hosts Master",
-    "appId": "org.howard.apps",
+    "productName": "Hosts-Master",
+    "appId": "org.nanfeng.apps",
     "mac": {
-      "category": "public.app-category.developer-tools"
+      "category": "public.app-category.developer-tools",
+      "target": "dmg"
     },
+    "asar": false,
     "files": [
       "build/",
       "output/",
-      "src/main"
+      "main/",
+      "!node_modules/**/*"
     ]
-  },
-  "author": "Howard.Zuo",
-  "license": "MIT",
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "lint-staged": {
-    "*.{j,t}s?(x)": "eslint --max-warnings=0"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
-    "@types/classnames": "^2.3.1",
-    "@types/hostile": "^1.3.0",
-    "@types/node": "^16.0.1",
-    "concurrently": "^6.2.0",
-    "electron": "^13.1.6",
-    "electron-builder": "^22.11.7",
-    "husky": "^7.0.1",
-    "lint-staged": "^11.0.0",
-    "react-coding-style": "^1.3.1"
-  },
-  "dependencies": {
-    "@umijs/plugin-antd": "^0.10.0",
-    "@umijs/plugin-model": "^2.6.1",
-    "ahooks": "^2.10.7",
-    "classnames": "^2.3.1",
-    "hostile": "^1.3.3",
-    "sudo-prompt": "^9.2.1",
-    "umi": "^3.5.5"
   }
 }

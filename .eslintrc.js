@@ -1,3 +1,3 @@
 module.exports = {
-  extends: [require.resolve('react-coding-style/src/eslint')]
-}
+  extends: require.resolve('@umijs/max/eslint'),
+};

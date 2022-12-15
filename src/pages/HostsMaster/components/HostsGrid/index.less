@@ -1,0 +1,40 @@
+.grid {
+  flex-shrink: 0;
+  background-color: #fff;
+}
+
+.searchInput {
+  border-radius: 0;
+}
+
+.dataContainer {
+  :global {
+    .ant-table-header {
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+    }
+
+    .ant-table {
+      border-left: none;
+      border-right: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    .ant-table-body {
+      margin: 0 !important;
+    }
+
+    .ant-table-thead {
+      background-color: #e3e6e6;
+    }
+
+    .ant-table-row-cell-break-word {
+      border-top-left-radius: 0 !important;
+    }
+
+    .ant-table-row-cell-last {
+      border-top-right-radius: 0 !important;
+    }
+  }
+}

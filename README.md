@@ -1,7 +1,6 @@
 # hosts
 
-![](https://img.shields.io/badge/hosts-3.1.2-blue.svg)
-![][david-url]
+![](https://img.shields.io/badge/hosts-4.0.0-blue.svg) ![][david-url]
 
 This is a tiny tool for quick managing hosts file
 
@@ -13,15 +12,15 @@ Since modifying hosts file require root privileges, you may need to approve it o
 
 # Download
 
-- Mac 11.11+: [64bit](https://github.com/leftstick/hosts-high/releases/download/3.1.2/Hosts.Master-3.1.2-mac.zip)
+- Mac 11.11+: [64bit](https://github.com/leftstick/hosts-high/releases/download/4.0.0/Hosts.Master-4.0.0-mac.zip)
 
 ## How To Contribute
 
 > clone repo first
 
 ```bash
-npm install
-npm start
+pnpm i
+pnpm dev
 ```
 
 > once code changed, you may need `ctrl/cmd + shift + r` to reload it.
