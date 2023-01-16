@@ -10,10 +10,10 @@ function CreateHost() {
   const [form] = Form.useForm();
   const inputEl = useRef<InputRef>(null);
   const [drawerVisable, setDrawerVisable] = useState(false);
-  const { acquired } = useModel('usePermissionModel');
-  const { createHost } = useModel('useHostsModel');
+  const { canWriteHost } = useModel('usePermissionModel');
+  const { addHost } = useModel('useHostsModel');
 
-  if (!acquired) {
+  if (!canWriteHost) {
     return (
       <Tooltip placement="left" title="Please acquire permission first">
         <Button disabled>Create</Button>
@@ -28,8 +28,9 @@ function CreateHost() {
       domain: vals[1],
       alias: vals[2] && vals[2].trim(),
       disabled: false,
+      invalid: false,
     };
-    createHost(host).then(() => {
+    addHost(host).then(() => {
       form.resetFields();
       setDrawerVisable(false);
     });
@@ -38,7 +39,7 @@ function CreateHost() {
   return (
     <>
       <Button
-        disabled={!acquired}
+        disabled={!canWriteHost}
         onClick={() => {
           setDrawerVisable(!drawerVisable);
         }}

@@ -1,7 +1,7 @@
 import { Input, Table } from 'antd';
 import { useMemo, useState } from 'react';
 
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 
 import { IHost, ISize } from '@/IType';
 import EditableCell from '../EditableCell';
@@ -12,8 +12,11 @@ import styles from './index.less';
 function HostsGrid({ size }: { size: ISize }) {
   const [searchText, setSearchText] = useState('');
   const { hosts } = useModel('useHostsModel');
-  const displayHosts = useMemo(() => {
+  const finalHosts = useMemo(() => {
     return hosts.filter((h) => {
+      if (h.invalid) {
+        return false;
+      }
       if (!searchText) {
         return true;
       }
@@ -88,7 +91,7 @@ function HostsGrid({ size }: { size: ISize }) {
           pagination={false}
           className={styles.dataContainer}
           columns={columnDefs}
-          dataSource={displayHosts}
+          dataSource={finalHosts}
           rowKey={(host) => host.ip + host.domain}
           size="small"
         />

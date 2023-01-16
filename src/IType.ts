@@ -3,6 +3,7 @@ export interface IHost {
   domain: string;
   alias: string;
   disabled: boolean;
+  invalid: boolean;
 }
 
 export interface ISize {
@@ -12,4 +13,10 @@ export interface ISize {
 
 export interface IAlias {
   [key: string]: string;
+}
+
+export interface IPCResponse<T> {
+  success: boolean;
+  data: T;
+  message: string;
 }

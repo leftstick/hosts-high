@@ -13,50 +13,44 @@ import { IHost } from '@/IType';
 import styles from './index.less';
 
 function OperationRenderer({ data }: { data: IHost }) {
-  const { acquired } = useModel('usePermissionModel');
-  const { toggleHostState, removeHost } = useModel('useHostsModel');
+  const { canWriteHost } = useModel('usePermissionModel');
+  const { modifyHostField, delHost } = useModel('useHostsModel');
 
   return (
     <div className={styles.oper}>
       {!data.disabled && (
         <Tooltip
           title="Click to disable this rule"
-          getPopupContainer={(e) => e.parentElement!}
           overlayStyle={{ width: 170 }}
         >
           <PauseCircleOutlined
             className={classnames(styles.pauseBtn, {
-              [styles.disableBtn]: !acquired,
+              [styles.disableBtn]: !canWriteHost,
             })}
-            onClick={() => toggleHostState(data)}
+            onClick={() => modifyHostField('disabled', true, data)}
           />
         </Tooltip>
       )}
       {data.disabled && (
         <Tooltip
           title="Click to enable this rule"
-          getPopupContainer={(e) => e.parentElement!}
           overlayStyle={{ width: 170 }}
         >
           <PlayCircleOutlined
             className={classnames(styles.enableBtn, {
-              [styles.disableBtn]: !acquired,
+              [styles.disableBtn]: !canWriteHost,
             })}
-            onClick={() => toggleHostState(data)}
+            onClick={() => modifyHostField('disabled', false, data)}
           />
         </Tooltip>
       )}
-      <Tooltip
-        title="Click to delete this rule"
-        getPopupContainer={(e) => e.parentElement!}
-        overlayStyle={{ width: 165 }}
-      >
+      <Tooltip title="Click to delete this rule" overlayStyle={{ width: 165 }}>
         <DeleteOutlined
           style={{ marginLeft: 15 }}
           className={classnames(styles.delBtn, {
-            [styles.disableBtn]: !acquired,
+            [styles.disableBtn]: !canWriteHost,
           })}
-          onClick={() => removeHost(data)}
+          onClick={() => delHost(data)}
         />
       </Tooltip>
     </div>

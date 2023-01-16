@@ -11,11 +11,11 @@ function EditableCell({
   property,
 }: {
   record: IHost;
-  property: Exclude<keyof IHost, 'disabled'>;
+  property: Exclude<keyof IHost, 'disabled' | 'invalid'>;
 }) {
   const [editing, setEditing] = useState(false);
-  const { acquired } = useModel('usePermissionModel');
-  const { modifyHost } = useModel('useHostsModel');
+  const { canWriteHost } = useModel('usePermissionModel');
+  const { modifyHostField } = useModel('useHostsModel');
   const ref = useRef<HTMLDivElement>(null);
 
   useClickAway(() => {
@@ -27,7 +27,7 @@ function EditableCell({
       <div
         style={{ height: '21px', width: '100%' }}
         onDoubleClick={() => {
-          if (acquired) {
+          if (canWriteHost) {
             setEditing(true);
           }
         }}
@@ -44,10 +44,7 @@ function EditableCell({
         property={property}
         onChange={(val) => {
           setEditing(false);
-          modifyHost(record, {
-            ...record,
-            [property]: val,
-          });
+          modifyHostField(property, val, record);
         }}
       />
     </div>

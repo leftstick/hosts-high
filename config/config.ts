@@ -33,7 +33,7 @@ export default defineConfig({
     config
       .target('electron22-renderer')
       .externals({
-        'node:fs/promises': "require('node:fs/promises')",
+        electron: "require('electron')",
       })
       .end();
   },

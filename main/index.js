@@ -1,5 +1,6 @@
 const electron = require('electron');
 const path = require('path');
+const uiHandler = require('./uihandlers');
 const app = electron.app;
 const Menu = electron.Menu;
 const BrowserWindow = electron.BrowserWindow;
@@ -35,6 +36,8 @@ const startupOpts = {
     contextIsolation: false,
   },
 };
+
+uiHandler();
 
 app.on('ready', function () {
   Menu.setApplicationMenu(Menu.buildFromTemplate(require('./system/menus')));

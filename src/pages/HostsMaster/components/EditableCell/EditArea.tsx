@@ -46,7 +46,6 @@ export default function EditArea({
           onPressEnter={submit}
           onChange={(e) => {
             const val = e.target.value;
-            console.log('val', val);
             setValue(val);
             if (['ip', 'domain'].includes(property) && !val) {
               setError(`${property} is required`);

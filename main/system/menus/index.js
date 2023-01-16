@@ -40,7 +40,7 @@ module.exports = [
         click: function () {
           openMenu('about', resolve(__dirname, 'about.html'), {
             width: 285,
-            height: 230,
+            height: 250,
           });
         },
       },

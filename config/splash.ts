@@ -36,7 +36,4 @@ const splashDiv =  document.createElement('div');
 splashDiv.classList.add('spinner');
 document.body.appendChild(splashDiv);
 `,
-  `
-  window._electronProcess = process
-`,
 ];
